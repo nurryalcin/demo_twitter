@@ -48,6 +48,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
         'birthDate': birthDate,
         'password': _password,
         'profileImage': _profileImage,
+        'userUniqueName': userUniqueName,
       };
 
       await _saveUserDataToJson(userData);
@@ -104,6 +105,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
 
   final _formKey = GlobalKey<FormState>();
   String _userName = '';
+  String userUniqueName='';
   String _password = '';
   String _phoneNumber = '';
   String _eMail = '';
@@ -122,176 +124,199 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Kayıt Ol'),
+          title: const Text('Kayıt Ol'),
         ),
-        body: Form(
-          key: _formKey,
-          child: Padding(
-            padding: EdgeInsets.only(top: 25, left: 15),
-            child: Column(
-                children: [
-              TextFormField(
-                onChanged: (value) {
-                  setState(() {
-                    if (!showPhoneNumber) {
-                      _userName = value;
-                    } else {
-                      _phoneNumber = value;
-                    }
-                  });
-                },
-                validator: (value) {
-                  if (!showPhoneNumber && (value == null || value.isEmpty)) {
-                    return 'İsim kısmı boş olamaz';
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  labelText: 'İsim',
-                ),
-              ),
-              TextFormField(
-                onChanged: (value) {
-                  setState(() {
-                    if (!showPhoneNumber) {
-                      _eMail = value;
-                    } else {
-                      _phoneNumber = value;
-                    }
-                  });
-                },
-                validator: (value) {
-                  if (!showPhoneNumber && (value == null || value.isEmpty)) {
-                    return ' E posta adresi boş olamaz.';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  labelText: showPhoneNumber ? 'Telefon Numarası' : 'E Posta',
-                ),
-              ),
-              Row(
-                children: [
-                  TextButton(
-                    onPressed: toggleShowPhoneNumber,
-                    child: Text(showPhoneNumber
-                        ? 'E Posta Kullan'
-                        : 'Telefon Numarası Kullan'),
-                  ),
-                ],
-              ),
-
-
-              Text(
-                showPhoneNumber ? _phoneNumber : _eMail,
-                style: TextStyle(fontSize: 20),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Doğum Tarihinizi Seçiniz',
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
+        body: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 25, left: 15),
+              child: Column(
                   children: [
-                    DropdownButton<int>(
-                      hint: Text('Gün'),
-                      value: selectedDay,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedDay = value;
-                        });
-                      },
-                      items: daysInMonth(selectedYear ?? DateTime.now().year,
-                              selectedMonth ?? DateTime.now().month)
-                          .map<DropdownMenuItem<int>>((int value) {
-                        return DropdownMenuItem<int>(
-                          value: value,
-                          child: Text(value.toString()),
-                        );
-                      }).toList(),
-                    ),
-                    SizedBox(width: 50),
-                    DropdownButton<int>(
-                      hint: Text('Ay'),
-                      value: selectedMonth,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedMonth = value;
-                        });
-                      },
-                      items: List.generate(12, (index) => index + 1)
-                          .map<DropdownMenuItem<int>>((int value) {
-                        return DropdownMenuItem<int>(
-                          value: value,
-                          child: Text(value.toString()),
-                        );
-                      }).toList(),
-                    ),
-                    SizedBox(width: 50),
-                    DropdownButton<int>(
-                      hint: Text('Yıl'),
-                      value: selectedYear,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedYear = value;
-                        });
-                      },
-                      items: List.generate(
-                              100, (index) => DateTime.now().year - index)
-                          .map<DropdownMenuItem<int>>((int value) {
-                        return DropdownMenuItem<int>(
-                          value: value,
-                          child: Text(value.toString()),
-                        );
-                      }).toList(),
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                  ],
-
-
-                ),
-              ),
-                  TextFormField(
-                    onChanged: (value) {
-                      setState(() {
-                        _password = value;
-                      });
-                    },
-                    obscureText: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Şifre boş olamaz';
+                TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      if (!showPhoneNumber) {
+                        _userName = value;
+                      } else {
+                        _phoneNumber = value;
                       }
-                      return null;
-                    },
-                    decoration: InputDecoration(labelText: 'Şifre Belirleyiniz'),
+                    });
+                  },
+                  validator: (value) {
+                    if (!showPhoneNumber && (value == null || value.isEmpty)) {
+                      return 'İsim kısmı boş olamaz';
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    labelText: 'İsim',
                   ),
-                  ElevatedButton(
-                    onPressed: _selectProfileImage,
-                    child: Text('Profil Resmi Seç'),
+                ),
+                TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      if (!showPhoneNumber) {
+                        _eMail = value;
+                      } else {
+                        _phoneNumber = value;
+                      }
+                    });
+                  },
+                  validator: (value) {
+                    if (!showPhoneNumber && (value == null || value.isEmpty)) {
+                      return ' E posta adresi boş olamaz.';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    labelText: showPhoneNumber ? 'Telefon Numarası' : 'E Posta',
                   ),
-              Padding(
-                padding: const EdgeInsets.only(left: 150,top:15),
-                child: Row(
+                ),
+                Row(
                   children: [
-                    ElevatedButton(
-                      onPressed: _login,
-                      child: Text('Kayıt Ol'),
-
+                    TextButton(
+                      onPressed: toggleShowPhoneNumber,
+                      child: Text(showPhoneNumber
+                          ? 'E Posta Kullan'
+                          : 'Telefon Numarası Kullan'),
                     ),
                   ],
                 ),
-              )
-            ]),
+
+                    TextFormField(
+                      onChanged: (value) {
+                        setState(() {
+                          if (!showPhoneNumber) {
+                            userUniqueName = value;
+                          } else {
+                            _phoneNumber = value;
+                          }
+                        });
+                      },
+                      validator: (value) {
+                        if (!showPhoneNumber && (value == null || value.isEmpty)) {
+                          return 'Kullanıcı Adı kısmı boş olamaz';
+                        }
+                        return null;
+                      },
+                      decoration: const InputDecoration(
+                        labelText: 'Kullanıcı Adı',
+                      ),
+                    ),
+
+
+                Text(
+                  showPhoneNumber ? _phoneNumber : _eMail,
+                  style: TextStyle(fontSize: 20),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Doğum Tarihinizi Seçiniz',
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      DropdownButton<int>(
+                        hint: Text('Gün'),
+                        value: selectedDay,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedDay = value;
+                          });
+                        },
+                        items: daysInMonth(selectedYear ?? DateTime.now().year,
+                                selectedMonth ?? DateTime.now().month)
+                            .map<DropdownMenuItem<int>>((int value) {
+                          return DropdownMenuItem<int>(
+                            value: value,
+                            child: Text(value.toString()),
+                          );
+                        }).toList(),
+                      ),
+                      SizedBox(width: 50),
+                      DropdownButton<int>(
+                        hint: Text('Ay'),
+                        value: selectedMonth,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedMonth = value;
+                          });
+                        },
+                        items: List.generate(12, (index) => index + 1)
+                            .map<DropdownMenuItem<int>>((int value) {
+                          return DropdownMenuItem<int>(
+                            value: value,
+                            child: Text(value.toString()),
+                          );
+                        }).toList(),
+                      ),
+                      SizedBox(width: 50),
+                      DropdownButton<int>(
+                        hint: Text('Yıl'),
+                        value: selectedYear,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedYear = value;
+                          });
+                        },
+                        items: List.generate(
+                                100, (index) => DateTime.now().year - index)
+                            .map<DropdownMenuItem<int>>((int value) {
+                          return DropdownMenuItem<int>(
+                            value: value,
+                            child: Text(value.toString()),
+                          );
+                        }).toList(),
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                    ],
+
+
+                  ),
+                ),
+                    TextFormField(
+                      onChanged: (value) {
+                        setState(() {
+                          _password = value;
+                        });
+                      },
+                      obscureText: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Şifre boş olamaz';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(labelText: 'Şifre Belirleyiniz'),
+                    ),
+                    ElevatedButton(
+                      onPressed: _selectProfileImage,
+                      child: Text('Profil Resmi Seç'),
+                    ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 150,top:15),
+                  child: Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: _login,
+                        child: Text('Kayıt Ol'),
+
+                      ),
+                    ],
+                  ),
+                )
+              ]),
+            ),
           ),
         ));
   }

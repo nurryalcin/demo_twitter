@@ -96,9 +96,8 @@ class Tweet {
 
     return Tweet(
       text: json['text'],
-      avatarPictureUri:
-          avatarPictureUri[avatarpictureIndex++ % avatarPictureUri.length],
-      userName: userName[userNameIndex++ % userName.length],
+      avatarPictureUri:json['avatarPictureUri'],
+      userName: json['userName'],
       userUniqueName:
           userUniqueName[userUniqueNameIndex++ % userUniqueName.length],
       likeCount: _generateRandomCount(),

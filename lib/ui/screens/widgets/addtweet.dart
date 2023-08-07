@@ -17,6 +17,8 @@ class AddTweet extends StatefulWidget {
   final userName;
   final userUniqueName;
 
+
+
   @override
   State<StatefulWidget> createState() => _AddTweetState();
 }
@@ -24,11 +26,10 @@ class AddTweet extends StatefulWidget {
 class _AddTweetState extends State<AddTweet> {
   File? _image;
   DateTime? _selectedDate;
-  String? profileImage;
 
   Future<void> _pickImage() async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedFile = await ImagePicker().pickImage(
+        source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
@@ -52,12 +53,13 @@ class _AddTweetState extends State<AddTweet> {
     if (file.existsSync()) {
       final jsonString = await file.readAsString();
       final List<Map<String, dynamic>> tweetMaps =
-          List<Map<String, dynamic>>.from(json.decode(jsonString));
+      List<Map<String, dynamic>>.from(json.decode(jsonString));
       setState(() {
         _savedTweets = tweetMaps.map((json) => Tweet.fromJson(json)).toList();
       });
     }
   }
+
 
   TextEditingController _tweetController = TextEditingController();
   TextEditingController _imageController = TextEditingController();
@@ -147,32 +149,36 @@ class _AddTweetState extends State<AddTweet> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const SizedBox(height: 16),
-            CircleAvatar(
-              backgroundImage:
-                  profileImage != null ? FileImage(File(profileImage!)) : null,
-            ),
-            TextField(
-              controller: _tweetController,
-              maxLines: 10,
-              decoration: const InputDecoration(
-                hintText: 'What is happening?!',
-              ),
-            ),
-            _image != null
-                ? Container(
-                    width: 75,
-                    height: 75,
-                    alignment: Alignment.centerLeft,
-                    child: AspectRatio(
-                      aspectRatio: 16 / 9,
-                      child: _image != null
-                          ? Image.file(
-                              _image!,
-                            )
-                          : Container(),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _image != null
+                    ? Container(
+                  width: 75,
+                  height: 75,
+                  alignment: Alignment.centerLeft,
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: Image.file(
+                      _image!,
                     ),
-                  )
-                : Container(),
+                  ),
+                )
+                    : Container(),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: TextField(
+                      controller: _tweetController,
+                      maxLines: 10,
+                      decoration: const InputDecoration(
+                        hintText: 'What is happening?!',
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             Padding(
               padding: const EdgeInsets.only(right: 100, top: 15),
               child: ElevatedButton(
