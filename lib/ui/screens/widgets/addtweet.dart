@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:twitter/ui/screens/widgets/listtweet.dart';
 import 'package:twitter/ui/screens/widgets/tweetwidget.dart';
 
 class AddTweet extends StatefulWidget {
@@ -17,8 +18,6 @@ class AddTweet extends StatefulWidget {
   final userName;
   final userUniqueName;
 
-
-
   @override
   State<StatefulWidget> createState() => _AddTweetState();
 }
@@ -28,8 +27,8 @@ class _AddTweetState extends State<AddTweet> {
   DateTime? _selectedDate;
 
   Future<void> _pickImage() async {
-    final pickedFile = await ImagePicker().pickImage(
-        source: ImageSource.gallery);
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
@@ -53,13 +52,12 @@ class _AddTweetState extends State<AddTweet> {
     if (file.existsSync()) {
       final jsonString = await file.readAsString();
       final List<Map<String, dynamic>> tweetMaps =
-      List<Map<String, dynamic>>.from(json.decode(jsonString));
+          List<Map<String, dynamic>>.from(json.decode(jsonString));
       setState(() {
         _savedTweets = tweetMaps.map((json) => Tweet.fromJson(json)).toList();
       });
     }
   }
-
 
   TextEditingController _tweetController = TextEditingController();
   TextEditingController _imageController = TextEditingController();
@@ -106,22 +104,9 @@ class _AddTweetState extends State<AddTweet> {
 
   void _onTweetButtonPressed() async {
     await _saveTweetData();
+Navigator.push(context,
 
-    final newTweet = Tweet(
-      text: _tweetController.text,
-      avatarPictureUri: widget.avatarPictureUri ?? '',
-      userName: widget.userName ?? '',
-      userUniqueName: widget.userUniqueName ?? '',
-      likeCount: 0,
-      viewCount: 0,
-      retweetsCount: 0,
-      quotesCount: 0,
-      bookmarksCount: 0,
-      image: _image?.path ?? '',
-      twitDate: _selectedDate ?? DateTime.now(),
-    );
-
-    Navigator.pop(context, newTweet);
+      MaterialPageRoute(builder: (context) => ListWidget()));
   }
 
   @override
@@ -154,16 +139,16 @@ class _AddTweetState extends State<AddTweet> {
               children: [
                 _image != null
                     ? Container(
-                  width: 75,
-                  height: 75,
-                  alignment: Alignment.centerLeft,
-                  child: AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: Image.file(
-                      _image!,
-                    ),
-                  ),
-                )
+                        width: 75,
+                        height: 75,
+                        alignment: Alignment.centerLeft,
+                        child: AspectRatio(
+                          aspectRatio: 16 / 9,
+                          child: Image.file(
+                            _image!,
+                          ),
+                        ),
+                      )
                     : Container(),
                 Expanded(
                   child: Padding(

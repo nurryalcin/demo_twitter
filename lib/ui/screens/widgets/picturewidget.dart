@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:twitter/ui/screens/widgets/fullscreen.dart';
 
@@ -47,7 +46,7 @@ class PictureWidget extends StatelessWidget {
         child: AspectRatio(
           aspectRatio: 16 / 9,
           child: Image.file(
-            File(imagePath),
+            File(imagePath!),
             fit: BoxFit.fitWidth,
           ),
         ),

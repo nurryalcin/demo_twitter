@@ -4,7 +4,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:twitter/ui/screens/widgets/listtweet.dart';
 import 'dart:io';
 
-import 'package:twitter/ui/screens/widgets/tweetwidget.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -77,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 decoration: InputDecoration(labelText: 'E-mail/Telefon'),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 onChanged: (value) {
                   setState(() {
@@ -105,4 +104,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-

@@ -5,6 +5,51 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:twitter/ui/screens/welcome.dart';
 
+class UserData {
+  final String name;
+  final String email;
+  final String phoneNumber;
+  final String birthDate;
+  final String password;
+  final String profileImage;
+  final String userUniqueName;
+
+  UserData({
+    required this.name,
+    required this.email,
+    required this.phoneNumber,
+    required this.birthDate,
+    required this.password,
+    required this.profileImage,
+    required this.userUniqueName,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'email': email,
+      'phoneNumber': phoneNumber,
+      'birthDate': birthDate,
+      'password': password,
+      'profileImage': profileImage,
+      'userUniqueName': userUniqueName,
+    };
+  }
+}
+
+class LoginService {
+  static UserData? _userData;
+
+  static void setUserData(UserData data) {
+    _userData = data;
+  }
+
+  static UserData? getUserData() {
+    return _userData;
+  }
+}
+
+
 
 class SignUpWidget extends StatefulWidget {
   const SignUpWidget({Key? key}) : super(key: key);
@@ -28,12 +73,16 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     }
   }
 
+
+
+
   final _jsonFile = File('login.json');
 
   void _login() async {
     if (_formKey.currentState!.validate()) {
       String birthDate = '';
-      if (selectedDay != null && selectedMonth != null && selectedYear != null) {
+      if (selectedDay != null && selectedMonth != null &&
+          selectedYear != null) {
         birthDate = '$selectedDay/$selectedMonth/$selectedYear';
       }
 
@@ -41,15 +90,18 @@ class _SignUpWidgetState extends State<SignUpWidget> {
         _phoneNumber = _eMail;
       }
 
-      final userData = {
-        'name': _userName,
-        'email': _eMail,
-        'phoneNumber': _phoneNumber,
-        'birthDate': birthDate,
-        'password': _password,
-        'profileImage': _profileImage,
-        'userUniqueName': userUniqueName,
-      };
+
+      final userData = UserData(
+        name: _userName,
+        email: _eMail,
+        phoneNumber: _phoneNumber,
+        birthDate: birthDate,
+        password: _password,
+        profileImage: _profileImage ?? '',
+        userUniqueName: userUniqueName,
+      );
+
+      LoginService.setUserData(userData);
 
       await _saveUserDataToJson(userData);
 
@@ -81,15 +133,14 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   }
 
 
-  Future<void> _saveUserDataToJson(Map<String, dynamic> userData) async {
+  Future<void> _saveUserDataToJson(UserData userData) async {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/login.json');
 
-    final jsonUserData = jsonEncode(userData);
+    final jsonUserData = jsonEncode(userData.toJson());
     await file.writeAsString(jsonUserData);
-
-
   }
+
 
 
 
@@ -104,6 +155,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   }
 
   final _formKey = GlobalKey<FormState>();
+
   String _userName = '';
   String userUniqueName='';
   String _password = '';

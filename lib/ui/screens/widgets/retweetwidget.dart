@@ -1,8 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:twitter/ui/screens/widgets/titletext.dart';
-// ignore: unused_import
-import '../../../utils/class.dart';
 import 'numberwidget.dart';
 
 class RetweetWidget extends StatefulWidget {

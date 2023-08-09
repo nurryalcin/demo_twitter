@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:twitter/ui/screens/widgets/titletext.dart';
 import '../../../utils/class.dart';
@@ -49,9 +51,15 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 width: 75,
                 height: 75,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image:
-                        DecorationImage(image:NetworkImage(widget.avatarImage))),
+                  shape: BoxShape.circle,
+                  image: widget.avatarImage != null
+                      ? DecorationImage(
+                    image: FileImage(File(widget.avatarImage!)),
+                    fit: BoxFit.cover,
+                  )
+                      : null,
+                ),
+
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 40, left: 15, bottom: 50),

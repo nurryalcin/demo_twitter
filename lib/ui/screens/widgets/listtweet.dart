@@ -21,11 +21,6 @@ class _ListWidgetState extends State<ListWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: profileImage != null
-            ? CircleAvatar(
-          backgroundImage: FileImage(File(profileImage!)),
-        )
-            : null,
       ),
       body: SingleChildScrollView(
         child: FutureBuilder<List<Tweet>>(

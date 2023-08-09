@@ -22,10 +22,6 @@ class Tweet {
   int quotesCount;
   int bookmarksCount;
 
-  static int userUniqueNameIndex = 0;
-  static int userNameIndex = 0;
-  static int avatarpictureIndex = 0;
-
   Tweet({
     this.image,
     required this.text,
@@ -56,6 +52,45 @@ class Tweet {
     };
   }
 
+  Future<Tweet?> fetchUserDataFromJson() async {
+    try {
+      final directory = await getApplicationDocumentsDirectory();
+      final filePath = '${directory.path}/login.json';
+      final file = File(filePath);
+
+      if (!file.existsSync()) {
+        print("Dosya bulunamadı.");
+        return null;
+      }
+
+      String jsonString = await file.readAsString();
+      Map<String, dynamic> userData = json.decode(jsonString);
+
+      String username = userData['name'];
+      String useruniquename = userData['userUniqueName'];
+      String avatarpictureuri = userData['ProfileImage'];
+
+      Tweet userTweet = Tweet(
+        text: "",
+        avatarPictureUri: avatarpictureuri,
+        userName: username,
+        userUniqueName: useruniquename,
+        twitDate: DateTime.now(),
+        likeCount: 0,
+        viewCount: 0,
+        retweetsCount: 0,
+        quotesCount: 0,
+        bookmarksCount: 0,
+      );
+
+      return userTweet;
+    } catch (e) {
+      print("Veri çekme hatası: $e");
+      return null;
+    }
+  }
+
+
   Future<List<Tweet>> fetchTweetsDataFromJson() async {
     final directory = await getApplicationDocumentsDirectory();
     final file = File('${directory.path}/database.json');
@@ -75,31 +110,15 @@ class Tweet {
   factory Tweet.fromJson(Map<String, dynamic> json) {
     Random _random = Random();
 
-
     int _generateRandomCount() {
       return _random.nextInt(1000000000);
     }
 
-    final List<String> avatarPictureUri = [
-      'https://pbs.twimg.com/profile_images/1640331374400774145/c1oF1C6M_400x400.jpg',
-      'https://pbs.twimg.com/profile_images/1683325380441128960/yRsRRjGO_400x400.jpg',
-      'https://pbs.twimg.com/profile_images/1622557245950107648/jq2sqW7i_400x400.jpg',
-    ];
-
-    final List<String> userName = ['Fenerbahçe SK', 'Elon Musk', 'BBO Sports'];
-
-    final List<String> userUniqueName = [
-      '@Fenerbahce',
-      '@elonmusk',
-      '@bbosports'
-    ];
-
     return Tweet(
       text: json['text'],
-      avatarPictureUri:json['avatarPictureUri'],
-      userName: json['userName'],
-      userUniqueName:
-          userUniqueName[userUniqueNameIndex++ % userUniqueName.length],
+      avatarPictureUri: json['profileImage'],
+      userName: json['name'],
+      userUniqueName: json['userUniqueName'],
       likeCount: _generateRandomCount(),
       viewCount: _generateRandomCount(),
       retweetsCount: _generateRandomCount(),
@@ -112,8 +131,6 @@ class Tweet {
 }
 
 class TweetWidget extends StatelessWidget {
-
-
   final Tweet tweet;
 
   const TweetWidget({required this.tweet});
