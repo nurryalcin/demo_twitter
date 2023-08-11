@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:twitter/ui/screens/signinupwidget.dart';
+import 'package:twitter/ui/screens/registerwidget.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
 import 'login.dart';
 
@@ -29,6 +29,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
+
       padding: const EdgeInsets.only(top: 300),
       child: Column(
           children: [

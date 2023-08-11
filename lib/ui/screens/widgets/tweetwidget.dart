@@ -66,9 +66,9 @@ class Tweet {
       String jsonString = await file.readAsString();
       Map<String, dynamic> userData = json.decode(jsonString);
 
-      String username = userData['name'];
+      String username = userData['userName'];
       String useruniquename = userData['userUniqueName'];
-      String avatarpictureuri = userData['ProfileImage'];
+      String avatarpictureuri = userData['avatarPictureUri'];
 
       Tweet userTweet = Tweet(
         text: "",
@@ -116,8 +116,8 @@ class Tweet {
 
     return Tweet(
       text: json['text'],
-      avatarPictureUri: json['profileImage'],
-      userName: json['name'],
+      avatarPictureUri: json['avatarPictureUri'],
+      userName: json['userName'],
       userUniqueName: json['userUniqueName'],
       likeCount: _generateRandomCount(),
       viewCount: _generateRandomCount(),

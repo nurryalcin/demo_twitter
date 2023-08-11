@@ -7,6 +7,8 @@ import 'addtweet.dart';
 
 
 class ListWidget extends StatefulWidget{
+  const ListWidget({super.key});
+
   @override
   State<StatefulWidget> createState()=> _ListWidgetState();
 
@@ -64,6 +66,45 @@ class _ListWidgetState extends State<ListWidget> {
     );
   }
 }
+
+Future<Tweet?> fetchUserDataFromJson() async {
+  try {
+    final directory = await getApplicationDocumentsDirectory();
+    final filePath = '${directory.path}/login.json';
+    final file = File(filePath);
+
+    if (!file.existsSync()) {
+      print("Dosya bulunamadı.");
+      return null;
+    }
+
+    String jsonString = await file.readAsString();
+    Map<String, dynamic> userData = json.decode(jsonString);
+
+    String username = userData['userName'];
+    String useruniquename = userData['userUniqueName'];
+    String avatarpictureuri = userData['avatarPictureUri'];
+
+    Tweet userTweet = Tweet(
+      text: "",
+      avatarPictureUri: avatarpictureuri,
+      userName: username,
+      userUniqueName: useruniquename,
+      twitDate: DateTime.now(),
+      likeCount: 0,
+      viewCount: 0,
+      retweetsCount: 0,
+      quotesCount: 0,
+      bookmarksCount: 0,
+    );
+
+    return userTweet;
+  } catch (e) {
+    print("Veri çekme hatası: $e");
+    return null;
+  }
+}
+
 
 
 Future<List<Tweet>> fetchTweetsDataFromJson() async {

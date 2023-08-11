@@ -9,14 +9,9 @@ import 'package:twitter/ui/screens/widgets/tweetwidget.dart';
 class AddTweet extends StatefulWidget {
   const AddTweet({
     Key? key,
-    this.avatarPictureUri,
-    this.userName,
-    this.userUniqueName,
   }) : super(key: key);
 
-  final avatarPictureUri;
-  final userName;
-  final userUniqueName;
+
 
   @override
   State<StatefulWidget> createState() => _AddTweetState();
@@ -27,8 +22,7 @@ class _AddTweetState extends State<AddTweet> {
   DateTime? _selectedDate;
 
   Future<void> _pickImage() async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
@@ -37,6 +31,7 @@ class _AddTweetState extends State<AddTweet> {
     }
   }
 
+
   List<Tweet> _savedTweets = [];
 
   @override
@@ -44,6 +39,20 @@ class _AddTweetState extends State<AddTweet> {
     super.initState();
     _loadSavedTweets();
   }
+
+  Future<Map<String, dynamic>> _loadUserData() async {
+    final directory = await getApplicationDocumentsDirectory();
+    final userFile = File('${directory.path}/login.json');
+
+    if (userFile.existsSync()) {
+      final jsonString = await userFile.readAsString();
+      return json.decode(jsonString);
+    }
+
+    return {};
+  }
+
+
 
   Future<void> _loadSavedTweets() async {
     final directory = await getApplicationDocumentsDirectory();
@@ -72,6 +81,7 @@ class _AddTweetState extends State<AddTweet> {
   Future<void> _saveTweetData() async {
     try {
       final directory = await getApplicationDocumentsDirectory();
+      final user = await _loadUserData();
       final file = File('${directory.path}/database.json');
       List<Map<String, dynamic>> tweets = [];
 
@@ -82,9 +92,9 @@ class _AddTweetState extends State<AddTweet> {
 
       Tweet newTweet = Tweet(
         text: _tweetController.text,
-        avatarPictureUri: widget.avatarPictureUri ?? '',
-        userName: widget.userName ?? '',
-        userUniqueName: widget.userUniqueName ?? '',
+        avatarPictureUri: user['avatarPictureUri'] ,
+        userName: user['userName'] ,
+        userUniqueName: user['userUniqueName'],
         likeCount: 0,
         viewCount: 0,
         retweetsCount: 0,
@@ -102,12 +112,12 @@ class _AddTweetState extends State<AddTweet> {
     }
   }
 
+
   void _onTweetButtonPressed() async {
     await _saveTweetData();
-Navigator.push(context,
-
-      MaterialPageRoute(builder: (context) => ListWidget()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ListWidget()));
   }
+
 
   @override
   Widget build(BuildContext context) {

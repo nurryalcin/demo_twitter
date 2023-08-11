@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:path_provider/path_provider.dart';
-import 'package:twitter/ui/screens/widgets/listtweet.dart';
-import 'dart:io';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:twitter/api_service/user_service.dart';
+
 
 
 class LoginPage extends StatefulWidget {
@@ -12,45 +12,20 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  String _emailOrPhone = '';
+  String _email = '';
   String _password = '';
 
-  Future<File> _getLocalFile() async {
-    final directory = await getApplicationDocumentsDirectory();
-    return File('${directory.path}/login.json');
-  }
+  void apiLogin() async{
+    var user = await UserService().login(_email, _password);
+    if(user!= null){
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  Future<Map<String, dynamic>> _readJson() async {
-    try {
-      final file = await _getLocalFile();
-      final jsonString = await file.readAsString();
-      final Map<String, dynamic> data = jsonDecode(jsonString);
-      print('Okunan veriler: $data');
-      return data;
-    } catch (e) {
-      print('Dosya okuma hatası: $e');
-      return {};
+      await prefs.setString('user', jsonEncode(user));
+      prefs.getString('user');
     }
+    print(user?.id);
   }
 
-  void _login() async {
-    if (_formKey.currentState!.validate()) {
-      final userData = await _readJson();
-      print('userData: $userData');
-      final emailOrPhoneFromData = userData['email'];
-      final password = userData['password'];
-
-      if (_emailOrPhone == emailOrPhoneFromData && _password == password) {
-        print('Giriş başarılı');
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ListWidget()),
-        );
-      } else {
-        print('Kullanıcı adı veya şifre hatalı');
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,16 +40,16 @@ class _LoginPageState extends State<LoginPage> {
               TextFormField(
                 onChanged: (value) {
                   setState(() {
-                    _emailOrPhone = value;
+                    _email = value;
                   });
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'E-mail/Telefon boş olamaz';
+                    return 'E-mail boş olamaz';
                   }
                   return null;
                 },
-                decoration: InputDecoration(labelText: 'E-mail/Telefon'),
+                decoration: InputDecoration(labelText: 'E-mail'),
               ),
               const SizedBox(height: 16),
               TextFormField(
@@ -94,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 16),
               ElevatedButton(
-                onPressed: _login,
+                onPressed:() =>  apiLogin(),
                 child: Text('Giriş Yap'),
               ),
             ],
