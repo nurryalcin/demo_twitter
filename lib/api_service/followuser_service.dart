@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:twitter/model/followuser.dart';
 import 'package:http/http.dart' as http;
-
-import '../model/user.dart';
+import 'package:twitter/model/user.dart';
 
 class FollowUserService {
   final String baseUrl = 'http://192.168.1.70:5169';
@@ -45,10 +43,10 @@ class FollowUserService {
 
         return followedUsers;
       } else {
-        throw Exception('Failed to get followed users: ${response.statusCode}');
+        throw Exception('Takip edilen kullanıcılar alınamadı: ${response.statusCode}');
       }
     } catch (e) {
-      throw Exception('An error occurred while fetching followed users: $e');
+      throw Exception('Takip edilen kullanıcılar getirilirken bir hata oluştu: $e');
     }
   }
 
@@ -70,10 +68,10 @@ class FollowUserService {
         List<User> followedUsers = data.map((item) => User.fromJson(item)).toList();
         return followedUsers;
       } else {
-        throw Exception('Failed to load followed users');
+        throw Exception('Takip edilen kullanıcılar yüklenemedi');
       }
     } catch (e) {
-      throw Exception('An error occurred: $e');
+      throw Exception('Bir hata oluştu: $e');
     }
   }
 
@@ -86,10 +84,10 @@ class FollowUserService {
         List<User> followingUsers = data.map((item) => User.fromJson(item)).toList();
         return followingUsers;
       } else {
-        throw Exception('Failed to load following users');
+        throw Exception('Takip edilen kullanıcılar yüklenemedi');
       }
     } catch (e) {
-      throw Exception('An error occurred: $e');
+      throw Exception('Bir hata oluştu: $e');
     }
   }
 }

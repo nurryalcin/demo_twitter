@@ -20,7 +20,7 @@ class TweetWithProfile {
       this.fullname,
       this.username,
       this.createdAt,
-      this.parentTweetId
+      this.parentTweetId,
       );
 
   factory TweetWithProfile.fromJson(dynamic json) {
@@ -32,9 +32,7 @@ class TweetWithProfile {
       json['avatarPhotoUrl'] as String?,
       json['fullname'] as String,
       json['username'] as String,
-      json['createdAt'] as String,
-        json['parentTweetId'] == null ? null : json['parentTweetId'] as int
-
+      json['createdAt'] as String, json['parentTweetId'] == null ? null : json['parentTweetId'] as int,
     );
   }
 
@@ -48,7 +46,7 @@ class TweetWithProfile {
       'fullname':fullname,
       'username':username,
       'createdAt': createdAt,
-      'parentTweetId':parentTweetId
+      'parentTweetId':parentTweetId,
 
     };
   }

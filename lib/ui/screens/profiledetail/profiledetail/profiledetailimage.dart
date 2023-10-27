@@ -19,31 +19,32 @@ class ProfileDetailImage extends StatelessWidget {
             alignment: Alignment.centerLeft,
             children: [
               Container(
-                margin: EdgeInsets.only(bottom: 80, top: 10),
+                margin:EdgeInsets.only(bottom: 60),
                 width: 500,
-                height: 150,
-                color: Colors.grey[300],
+                height: 100,
+                color: Colors.lightBlue
               ),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 15, top: 100,),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: CardColor.fullScreenTitleColor,
-                    ),
-                    height: 100,
-                    width: 100,
-                    child: TweetCard(tweet: tweet,),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 150),
-                    child: FollowButton(userId: tweet!.userId),
-                  )
+              Padding(
+                padding: const EdgeInsets.only(top: 70),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                   Padding(
+                     padding: const EdgeInsets.only(left: 15),
+                     child: CircleAvatar(
+                       backgroundColor: CardColor.fullScreenTitleColor,
+                       radius: 45,
+                       child: TweetCardProfile(tweet: tweet,radius: 40),
+                     ),
+                   ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 40),
+                      child: FollowButton(userId: tweet!.userId),
+                    )
 
-                ],
+                  ],
+                ),
               ),
             ],
           ),

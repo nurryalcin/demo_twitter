@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:twitter/model/followusertweet.dart';
 import 'package:twitter/ui/screens/homepage/followtweetcard/followcardtweet.dart';
-import 'package:twitter/ui/screens/homepage/tweetdetail/tweetcard/replytweetlist.dart';
+import 'package:twitter/ui/screens/homepage/replydetailpage/replytweetlist.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
 import 'package:twitter/utils/class.dart';
 

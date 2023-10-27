@@ -17,14 +17,10 @@ class _FollowTweetListState extends State<FollowTweetList> {
   int? userId;
   int? tweetId;
 
-
-
-
   @override
   void initState() {
     super.initState();
     followUserListTweet();
-
   }
 
   Future<void> followUserListTweet() async {
@@ -35,7 +31,8 @@ class _FollowTweetListState extends State<FollowTweetList> {
     }
 
     if (userId != null) {
-      final List<FollowUserTweet> getFollowUserTweets = await TweetService().getFollowUserTweets(userId!);
+      final List<FollowUserTweet> getFollowUserTweets =
+          await TweetService().getFollowUserTweets(userId!);
 
       setState(() {
         followTweets = getFollowUserTweets ?? [];
@@ -43,18 +40,20 @@ class _FollowTweetListState extends State<FollowTweetList> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         for (final followTweet in followTweets)
           GestureDetector(
-              onTap: () =>
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) =>
-                      TweetDetailPage(
-                        followTweet: followTweet, tweetId: followTweet.id,),)),
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TweetDetailPage(
+                      followTweet: followTweet,
+                      tweetId: followTweet.id,
+                    ),
+                  )),
               child: FollowCardTweet(followTweet: followTweet))
       ],
     );

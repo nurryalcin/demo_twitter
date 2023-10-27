@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:twitter/model/message.dart';
-import '../model/user.dart';
+import 'package:twitter/model/user.dart';
 
 class MessageService {
   final String baseUrl = 'http://192.168.1.70:5169';

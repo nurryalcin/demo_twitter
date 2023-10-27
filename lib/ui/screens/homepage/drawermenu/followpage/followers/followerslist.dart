@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:twitter/api_service/followuser_service.dart';
 import 'package:twitter/utils/sharedpreferences.dart';
 import 'package:twitter/model/user.dart';
-import 'followerscardwidget.dart';
+import 'package:twitter/ui/screens/homepage/drawermenu/followpage/followers/followerscardwidget.dart';
 
 class FollowingList extends StatefulWidget {
   const FollowingList({super.key});
@@ -12,18 +12,13 @@ class FollowingList extends StatefulWidget {
 }
 
 class _FollowingListState extends State<FollowingList> {
-
   List<User> followingUsers = [];
-
 
   @override
   void initState() {
     super.initState();
     _followingUserList();
   }
-
-
-
 
   Future<void> _followingUserList() async {
     try {
@@ -42,12 +37,14 @@ class _FollowingListState extends State<FollowingList> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        for (final user in followingUsers) FollowerCardWidget(user: user, ),
+        for (final user in followingUsers)
+          FollowerCardWidget(
+            user: user,
+          ),
       ],
     );
   }

@@ -4,7 +4,7 @@ class ProfileDetailTabbar extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Column(
         children: <Widget>[
           Container(
@@ -31,7 +31,6 @@ class ProfileDetailTabbar extends StatelessWidget{
                 Tab(text: 'Gönderiler',
                 ),
                 Tab(text: 'Yanıtlar',),
-                Tab(text: 'Öne Çıkanlar',),
               ],
             ),
           ),

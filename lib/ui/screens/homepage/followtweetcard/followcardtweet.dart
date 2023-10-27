@@ -35,7 +35,7 @@ class FollowCardTweet extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.only(top: 5,bottom: 5),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -49,7 +49,6 @@ class FollowCardTweet extends StatelessWidget {
             ),
           ),
           FollowCardTweetBottom(followTweet: followTweet)
-
         ],
       ),
     );

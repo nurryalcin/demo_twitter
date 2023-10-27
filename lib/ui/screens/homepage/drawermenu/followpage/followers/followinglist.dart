@@ -5,16 +5,16 @@ import 'package:twitter/ui/screens/homepage/drawermenu/followpage/followers/foll
 import 'package:twitter/utils/sharedpreferences.dart';
 
 class FollowingList extends StatefulWidget {
-  const FollowingList({super.key, });
-  @override
-  State<StatefulWidget> createState()=>_FollowingListState();
+  const FollowingList({
+    super.key,
+  });
 
+  @override
+  State<StatefulWidget> createState() => _FollowingListState();
 }
 
 class _FollowingListState extends State<FollowingList> {
-
   List<User> followingList = [];
-
 
   @override
   void initState() {
@@ -39,12 +39,14 @@ class _FollowingListState extends State<FollowingList> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        for (final user in followingList) FollowerCardWidget(user: user, ),
+        for (final user in followingList)
+          FollowerCardWidget(
+            user: user,
+          ),
       ],
     );
   }

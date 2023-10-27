@@ -153,7 +153,7 @@ class TweetService {
           .toList();
       return tweets;
     } else {
-      throw Exception('Failed to load tweets');
+      throw Exception('Tweetler yüklenemedi');
     }
   }
 
@@ -166,10 +166,25 @@ class TweetService {
       return jsonResponse.map((data) => TweetWithParent.fromJson(data))
           .toList();
     } else {
-      throw Exception('Failed to load replied tweets');
+      throw Exception('Yanıtlanan tweet\'ler yüklenemedi');
+    }
+  }
+
+  Future<void> deleteTweet(int tweetId) async {
+    try {
+      final response = await http.delete(
+        Uri.parse('$baseUrl/tweet/deletetweet/$tweetId'),
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception('Tweet silinemedi: ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      throw Exception('Tweet silinemedi: $e');
     }
   }
 }
+
 
 
 

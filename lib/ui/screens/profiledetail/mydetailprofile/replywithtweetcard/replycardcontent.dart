@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:twitter/api_service/tweet_service.dart';
-import 'package:twitter/model/tweetwithprofile.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/model/tweetwithparent.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
+import 'package:twitter/utils/class.dart';
 import 'package:twitter/utils/sharedpreferences.dart';
 
-class TweetCardContent extends StatelessWidget {
-  const TweetCardContent({Key? key, required this.tweet}) : super(key: key);
-  final TweetWithProfile tweet;
-
+class ReplyCardContent extends StatelessWidget{
+  const ReplyCardContent({super.key, required this.tweet});
+  final TweetWithParent tweet;
   void deletetweet() async {
     final userPreferences = UserPreferences();
     bool isLoggedIn = await userPreferences.isLoggedIn();
 
     if (isLoggedIn) {
       int userId = userPreferences.getUserId();
-        await TweetService().deleteTweet(tweet.id);
+      await TweetService().deleteTweet(tweet.repliedTweetId);
 
     }
   }
@@ -72,7 +71,6 @@ class TweetCardContent extends StatelessWidget {
       },
     );
   }
-
   String formatTweetDate(DateTime createdAt) {
     DateTime now = DateTime.now();
     Duration difference = now.difference(createdAt);
@@ -92,12 +90,14 @@ class TweetCardContent extends StatelessWidget {
     return '${difference.inHours}h ';
   }
 
+
+
   @override
   Widget build(BuildContext context) {
-    String username = tweet.username;
-    final fullname = tweet.fullname;
+    String username = tweet.repliedUsername;
+    final fullname = tweet.repliedFullname;
 
-    DateTime createdAt = DateTime.parse(tweet.createdAt);
+    DateTime createdAt = DateTime.parse(tweet.repliedTweetCreatedAt);
     String formattedDate = formatTweetDate(createdAt);
 
     return Padding(
@@ -139,19 +139,19 @@ class TweetCardContent extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 5),
-          if (tweet.message != null && tweet.message!.isNotEmpty)
+          if (tweet.repliedTweetMessage!= null && tweet.repliedTweetMessage!.isNotEmpty)
             Padding(
               padding: const EdgeInsets.only(right: 50),
               child: Text(
-                tweet.message!,
+                tweet.repliedTweetMessage!,
                 style: const TextStyle(fontSize: 15),
               ),
             ),
-          if (tweet.imageUrl != null && tweet.imageUrl!.isNotEmpty)
+          if (tweet.repliedTweetImageUrl != null && tweet.repliedTweetImageUrl!.isNotEmpty)
             ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: Image.network(
-                "http://192.168.1.70:5169/TweetImage/${tweet.imageUrl}",
+                "http://192.168.1.70:5169/TweetImage/${tweet.repliedTweetImageUrl}",
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -159,4 +159,5 @@ class TweetCardContent extends StatelessWidget {
       ),
     );
   }
+
 }

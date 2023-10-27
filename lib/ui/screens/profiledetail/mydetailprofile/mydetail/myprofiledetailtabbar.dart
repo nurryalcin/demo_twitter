@@ -47,13 +47,16 @@ class MyProfileDetailTabbar extends StatelessWidget {
                   child: TabBarView(
                     children: [
                       ListView(
+                       physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
                         children: [
                           for (final tweet in tweets!)
-                            DetailProfileTweet(tweet: tweet),
+                            TweetCard(tweet: tweet),
                         ],
 
                       ),
                       ListView(
+                        physics: NeverScrollableScrollPhysics(),
                         children: [
                           for (final replyTweet in tweetList!)
                             ReplyCard(tweet: replyTweet,)

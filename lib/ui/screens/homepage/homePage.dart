@@ -33,8 +33,9 @@ class _HomePageState extends State<HomePage> {
       currentFabText = isOverlayVisible ? "Post" : "";
     });
   }
+
   @override
-  void initstate(){
+  void initstate() {
     super.initState();
     _refreshFollowTweetList();
   }
@@ -42,8 +43,6 @@ class _HomePageState extends State<HomePage> {
   Future<void> _refreshFollowTweetList() async {
     await Future.delayed(const Duration(seconds: 2));
     FollowTweetList();
-
-
   }
 
   @override

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../../../api_service/user_service.dart';
-import '../../../utils/class.dart';
-import '../welcomepage/welcome.dart';
+import 'package:twitter/api_service/user_service.dart';
+import 'package:twitter/utils/class.dart';
+import 'package:twitter/ui/screens/welcomepage/welcome.dart';
 
 class RegisterPreview extends StatefulWidget {
   final String username;

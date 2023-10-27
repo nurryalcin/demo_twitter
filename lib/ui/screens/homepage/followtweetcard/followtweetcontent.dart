@@ -11,6 +11,7 @@ class FollowTweetContent extends StatelessWidget {
   const FollowTweetContent({Key? key, required this.followTweet}) : super(key: key);
 
   final FollowUserTweet followTweet;
+
   void _onCardTapped(BuildContext context) {
     int? userId = followTweet.followedUserId;
     final userProvider =
@@ -54,36 +55,45 @@ class FollowTweetContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              GestureDetector(
-                onTap: () {
-                  _onCardTapped(context);
-                },
-                child: TextWidget(
-                  titleText1: followTweet.fullname,
-                  fontWeight: FontWeight.bold,
-                  textSize: 15,
-                  textColor: CardColor.titleColor,
-                ),
-              ),
-              const Padding(padding: EdgeInsets.only(left: 5)),
-              GestureDetector(
-                onTap: () {
-                  _onCardTapped(context);
-                },
-                child: TextWidget(
-                    titleText1: '@${followTweet.username}',
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      _onCardTapped(context);
+                    },
+                    child: TextWidget(
+                      titleText1: followTweet.fullname,
+                      fontWeight: FontWeight.bold,
+                      textSize: 15,
+                      textColor: CardColor.titleColor,
+                    ),
+                  ),
+                  const Padding(padding: EdgeInsets.only(left: 5)),
+                  GestureDetector(
+                    onTap: () {
+                      _onCardTapped(context);
+                    },
+                    child: TextWidget(
+                        titleText1: '@${followTweet.username}',
+                        fontWeight: FontWeight.bold,
+                        textSize: 15,
+                        textColor: CardColor.userColor),
+                  ),
+                  const Padding(padding: EdgeInsets.only(left: 5)),
+                  TextWidget(
+                    titleText1: '·$formattedDate',
                     fontWeight: FontWeight.bold,
                     textSize: 15,
-                    textColor: CardColor.userColor),
+                    textColor: CardColor.userColor,
+                  ),
+                ],
               ),
-              const Padding(padding: EdgeInsets.only(left: 5)),
-              TextWidget(
-                titleText1: '·$formattedDate',
-                fontWeight: FontWeight.bold,
-                textSize: 15,
-                textColor: CardColor.userColor,
-              ),
+
+              IconButton(onPressed: () {
+
+              }, icon: Icon(Icons.more_vert,size: 20,color:CardColor.userColor,))
             ],
           ),
           SizedBox(height: 5,),

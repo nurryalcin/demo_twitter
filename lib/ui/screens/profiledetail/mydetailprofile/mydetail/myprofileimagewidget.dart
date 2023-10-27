@@ -23,6 +23,7 @@ class MyProfileImageWidget extends StatelessWidget {
               height: 100,
               color: Colors.lightBlue,
             ),
+            
             Padding(
               padding: const EdgeInsets.only(top: 70),
               child: Row(

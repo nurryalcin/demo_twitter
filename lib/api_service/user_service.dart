@@ -42,10 +42,6 @@ class UserService {
         body: json.encode(data),
         headers: {"content-type": "application/json"},
       );
-
-      print('API Yanıtı Kodu: ${response.statusCode}');
-      print('API Yanıtı Gövdesi: ${response.body}');
-
       if (response.statusCode == 200) {
         return User.fromJson(jsonDecode(response.body));
       } else {
@@ -62,7 +58,6 @@ class UserService {
         await http.get(Uri.parse("${baseUrl}/user/getUser?username=$username"));
 
     if (response.statusCode != 200) {
-      print("API request failed with status code: ${response.statusCode}");
       return null;
     }
 
@@ -94,10 +89,10 @@ class UserService {
         userProvider.updateImage(responseBody );
 
       } else {
-        print('Error: ${response.statusCode}');
+        print('Hata: ${response.statusCode}');
       }
     } catch (e) {
-      print('Network error: $e');
+      print('Ağ hatası: $e');
     }
   }
 }

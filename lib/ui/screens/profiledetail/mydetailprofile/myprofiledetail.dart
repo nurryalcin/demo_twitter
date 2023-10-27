@@ -3,12 +3,10 @@ import 'package:twitter/model/tweetwithparent.dart';
 import 'package:twitter/ui/screens/homepage/drawermenu/followfollowingwidget.dart';
 import 'package:twitter/ui/screens/profiledetail/mydetailprofile/mydetail/myprofileimagewidget.dart';
 import 'package:twitter/ui/screens/profiledetail/mydetailprofile/mydetail/myprofilenamedate.dart';
-import 'package:twitter/utils/class.dart';
 import 'package:twitter/utils/sharedpreferences.dart';
 import 'package:twitter/api_service/tweet_service.dart';
 import 'package:twitter/model/tweetwithprofile.dart';
-import '../profiledetail/profiledate.dart';
-import 'mydetail/myprofiledetailtabbar.dart';
+import 'package:twitter/ui/screens/profiledetail/mydetailprofile/mydetail/myprofiledetailtabbar.dart';
 
 class MyProfileDetailPage extends StatefulWidget {
   const MyProfileDetailPage({Key? key}) : super(key: key);

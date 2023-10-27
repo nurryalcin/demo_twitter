@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:twitter/model/tweetwithprofile.dart';
-import 'package:twitter/ui/screens/homepage/tweetdetail/tweetcard/cardtweet.dart';
-import 'package:twitter/ui/screens/homepage/tweetdetail/tweetcard/replytweetlist.dart';
+import 'package:twitter/ui/screens/homepage/replydetailpage/replytweetlist.dart';
+import 'package:twitter/ui/screens/profiledetail/tweetcard/tweetcard.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
 import 'package:twitter/utils/class.dart';
 
@@ -22,7 +22,7 @@ class ReplyDetailPage extends StatelessWidget {
         ),
         body: Column(
           children: [
-            CardTweet(tweetList: tweet!),
+            TweetCard(tweet: tweet!),
             ReplyTweetList(parentTweetId: tweet!.id)
           ],
         ));

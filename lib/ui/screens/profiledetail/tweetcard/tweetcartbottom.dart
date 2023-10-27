@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:twitter/model/tweetwithprofile.dart';
-import 'package:twitter/ui/screens/homepage/tweetdetail/tweetcard/replycardpage.dart';
+import 'package:twitter/ui/screens/homepage/replydetailpage/replycardpage.dart';
 import 'package:twitter/utils/provider.dart';
 
 class TweetCardBottom extends StatefulWidget {

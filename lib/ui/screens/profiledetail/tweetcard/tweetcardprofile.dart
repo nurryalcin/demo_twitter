@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:twitter/model/tweetwithprofile.dart';
 
-class TweetCard extends StatelessWidget {
-  const TweetCard({Key? key, this.radius = 30, required this.tweet}) : super(key: key);
+class TweetCardProfile extends StatelessWidget {
+  const TweetCardProfile({Key? key, this.radius = 30, required this.tweet}) : super(key: key);
   final double radius;
   final TweetWithProfile? tweet;
 

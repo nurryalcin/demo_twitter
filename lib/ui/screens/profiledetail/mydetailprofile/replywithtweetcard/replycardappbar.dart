@@ -24,22 +24,22 @@ class ReplyCardAppbar extends StatelessWidget {
 
     return Row(
       children: [
-        AvatarProfile(),
-        const Padding(padding: EdgeInsets.only(left: 15)),
+        AvatarProfile(radius: 20),
+        const Padding(padding: EdgeInsets.only(left: 5)),
         TextWidget(
           titleText1:  repliedFullname,
           fontWeight: FontWeight.bold,
           textSize: 15,
           textColor: CardColor.titleColor,
         ),
-        const Padding(padding: EdgeInsets.only(left: 15)),
+        const Padding(padding: EdgeInsets.only(left: 5)),
         TextWidget(
           titleText1: '@$repliedUsername',
           fontWeight: FontWeight.bold,
           textSize: 15,
           textColor: CardColor.userColor,
         ),
-        const Padding(padding: EdgeInsets.only(left: 15)),
+        const Padding(padding: EdgeInsets.only(left: 5)),
         TextWidget(
             titleText1: formattedDate,
             fontWeight: FontWeight.normal,
