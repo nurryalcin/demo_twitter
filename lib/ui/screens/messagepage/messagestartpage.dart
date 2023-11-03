@@ -18,7 +18,7 @@ class _MessageStartPageState extends State<MessageStartPage> {
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
-          padding: const EdgeInsets.only(left: 5),
+          padding: const EdgeInsets.all(4),
           child: GestureDetector(
             onTap: () async {
               showDialog(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:twitter/ui/screens/searchpage/searchpagecard/searchusercard.dart';
-import '../../../../model/user.dart';
+import 'package:twitter/model/user.dart';
+import 'package:twitter/ui/screens/homepage/drawermenu/page/followpage/shortcardwidget.dart';
 
 class SearchUserList extends StatelessWidget {
   final List<User> searchResults;
@@ -11,7 +11,10 @@ class SearchUserList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: searchResults.map((user) {
-        return SearchUserCard(userList: user);
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ShortCardWidget(user: user),
+        );
       }).toList(),
     );
   }

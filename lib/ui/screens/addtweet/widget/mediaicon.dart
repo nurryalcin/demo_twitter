@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../../utils/class.dart';
+import 'package:twitter/utils/class.dart';
 
 class MediaIcon extends StatefulWidget {
   MediaIcon({super.key, required this.onImageSelected});

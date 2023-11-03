@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:twitter/model/user.dart';
-import 'package:twitter/ui/screens/homepage/drawermenu/followpage/followers/followlistavatarprofile.dart';
 import 'package:twitter/ui/screens/profiledetail/profiledetail/profiletweetdetailpage.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
+import 'package:twitter/ui/screens/widgets/tweetcard/tweetcardavatarprofile.dart';
 import 'package:twitter/utils/class.dart';
 import 'package:twitter/utils/provider.dart';
 
-class FollowerCardWidget extends StatelessWidget {
-  const FollowerCardWidget({
+class ShortCardWidget extends StatelessWidget {
+  const ShortCardWidget({
     Key? key,
     this.user,
   }) : super(key: key);
@@ -39,20 +39,25 @@ class FollowerCardWidget extends StatelessWidget {
                 width: 319,
                 child: Row(
                   children: [
-                    FollowListAvatarProfile(user: user),
+                    TweetCardAvatarProfile(tweet:user ),
                     Padding(padding: EdgeInsets.only(right: 15)),
-                    TextWidget(
-                      titleText1: user!.fullname,
-                      fontWeight: FontWeight.bold,
-                      textSize: 15,
-                      textColor: CardColor.titleColor,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextWidget(
+                          titleText1: user!.fullname,
+                          fontWeight: FontWeight.bold,
+                          textSize: 15,
+                          textColor: CardColor.titleColor,
+                        ),
+                        const Padding(padding: EdgeInsets.only(left: 15)),
+                        TextWidget(
+                            titleText1: '@${user!.username}',
+                            fontWeight: FontWeight.bold,
+                            textSize: 15,
+                            textColor: CardColor.userColor),
+                      ],
                     ),
-                    const Padding(padding: EdgeInsets.only(left: 15)),
-                    TextWidget(
-                        titleText1: '@${user!.username}',
-                        fontWeight: FontWeight.bold,
-                        textSize: 15,
-                        textColor: CardColor.userColor),
                   ],
                 )),
           ),

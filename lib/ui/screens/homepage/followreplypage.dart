@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:twitter/ui/screens/addtweet/widget/mediaicon.dart';
-import 'package:twitter/ui/screens/homepage/followtweetcard/Followtweetavatarprofile.dart';
-import 'package:twitter/ui/screens/homepage/followtweetcard/followtweetcontent.dart';
 import 'package:twitter/ui/screens/widgets/avatarprofile.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
+import 'package:twitter/ui/screens/widgets/tweetcard/tweetcardavatarprofile.dart';
+import 'package:twitter/ui/screens/widgets/tweetcard/tweetcardcontent.dart';
 import 'package:twitter/utils/class.dart';
 import 'package:twitter/api_service/tweet_service.dart';
 import 'package:twitter/model/followusertweet.dart';
@@ -98,9 +98,9 @@ class _FollowReplyPageState extends State<FollowReplyPage> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  FollowTweetAvatarProfile(followTweet: widget.followTweet),
+                  TweetCardAvatarProfile(tweet: widget.followTweet,),
                   Expanded(
-                      child: FollowTweetContent(followTweet: widget.followTweet))
+                      child: TweetCardContent(tweet: widget.followTweet,))
                 ],
               ),
               Padding(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:twitter/ui/screens/homepage/drawermenu/drawermen%C3%BC.dart';
+import 'package:twitter/ui/screens/widgets/addtweetbutton.dart';
 import 'package:twitter/ui/screens/widgets/avatarprofile.dart';
 import 'package:twitter/ui/screens/widgets/titletext.dart';
 import 'package:twitter/utils/class.dart';
@@ -58,9 +59,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
         ],
       ),
 
-      floatingActionButton: FloatingActionButton(child:Icon(Icons.add,size: 30,),onPressed: () {
-        Navigator.pushNamed(context, '/addtweet');
-      },),
+      floatingActionButton: AddTweetButton(),
     );
   }
 }

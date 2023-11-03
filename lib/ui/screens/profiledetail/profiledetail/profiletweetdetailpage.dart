@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:twitter/ui/screens/profiledetail/profiledetail/profiledetailimage.dart';
 import 'package:twitter/ui/screens/profiledetail/profiledetail/profiledetailtabbar.dart';
 import 'package:twitter/ui/screens/profiledetail/profiledetail/profilenamedate.dart';
-import 'package:twitter/ui/screens/profiledetail/tweetcard/tweetcard.dart';
+import 'package:twitter/ui/screens/widgets/tweetcard/tweetcarddd.dart';
 import 'package:twitter/utils/provider.dart';
 import 'package:twitter/api_service/tweet_service.dart';
 import 'package:twitter/model/tweetwithprofile.dart';
@@ -63,7 +63,7 @@ class _ProfileDetailPageState extends State<ProfileTweetDetailPage> {
 
 
             ProfileDetailTabbar(),
-            for (final tweet in tweets) TweetCard(tweet: tweet),
+            for (final tweet in tweets) TweetCardd(tweet: tweet)
           ],
         ),
       ),

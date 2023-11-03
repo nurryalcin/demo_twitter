@@ -25,7 +25,7 @@ class FollowUserService {
     }
   }
 
-  Future<List<FollowUser>> getFollowedUser(int userId, int followedUserId) async {
+  Future<List<FollowUser>> getFollowingUser(int userId, int followedUserId) async {
     try {
       final response = await http.get(
         Uri.parse('$baseUrl/follow/getfolloweduser?userId=$userId&followedUserId=$followedUserId'),
@@ -52,14 +52,14 @@ class FollowUserService {
 
   Future<bool> isUserFollowed(int userId, int followedUserId) async {
     try {
-      final followedUsers = await getFollowedUser(userId, followedUserId);
+      final followedUsers = await getFollowingUser(userId, followedUserId);
       return followedUsers.any((user) => user.followedUserId == followedUserId);
     } catch (e) {
       throw Exception('Takip edilenleri kontrol ederken bir hata oluştu: $e');
     }
   }
 
-  Future<List<User>> getFollowedUsers(int userId) async {
+  Future<List<User>> getFollowingUsers(int userId) async {
     try {
       final response = await http.get(Uri.parse('$baseUrl/follow/getfollowedusers/$userId'));
 
@@ -75,7 +75,7 @@ class FollowUserService {
     }
   }
 
-  Future<List<User>> getFollowingUsers(int userId) async {
+  Future<List<User>> getFollowerUsers(int userId) async {
     try {
       final response = await http.get(Uri.parse('$baseUrl/follow/getfollowingusers/$userId'));
 

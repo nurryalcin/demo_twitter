@@ -7,11 +7,14 @@ import 'package:twitter/ui/screens/homepage/homePage.dart';
 import 'package:twitter/ui/screens/widgets/avatarprofile.dart';
 import 'package:twitter/ui/screens/widgets/bottomnavigationbarwidget.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
+import 'package:twitter/ui/screens/widgets/tweetcard/tweetcardavatarprofile.dart';
 import 'package:twitter/utils/sharedpreferences.dart';
 import '../../../utils/class.dart';
 
 class AddTweet extends StatefulWidget {
-  const AddTweet({super.key});
+  const AddTweet({
+    super.key,
+  });
 
   @override
   State<StatefulWidget> createState() => _AddTweetState();
@@ -24,7 +27,8 @@ class _AddTweetState extends State<AddTweet> {
 
   void updateButtonState() {
     setState(() {
-      isButtonEnabled = textEditingController.text.isNotEmpty || imageFile != null;
+      isButtonEnabled =
+          textEditingController.text.isNotEmpty || imageFile != null;
     });
   }
 
@@ -47,10 +51,10 @@ class _AddTweetState extends State<AddTweet> {
     textEditingController.addListener(() {
       updateButtonState();
     });
-      return Scaffold(
+    return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.close,size: 25),
+          icon: const Icon(Icons.close, size: 25),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -63,30 +67,30 @@ class _AddTweetState extends State<AddTweet> {
               child: ElevatedButton(
                 onPressed: isButtonEnabled
                     ? () async {
-                  sendMessage(imageFile);
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomePage(),
-                    ),
-                        (route) => false,
-                  );
-                }
+                        sendMessage(imageFile);
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ),
+                          (route) => false,
+                        );
+                      }
                     : null,
                 style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  )),
-                  backgroundColor: MaterialStatePropertyAll(isButtonEnabled
-                      ? CardColor.iconColorblue
-                      : Colors.lightBlueAccent,)
-                ),
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    )),
+                    backgroundColor: MaterialStatePropertyAll(
+                      isButtonEnabled
+                          ? CardColor.iconColorblue
+                          : Colors.lightBlueAccent,
+                    )),
                 child: TextWidget(
-                  titleText1: 'Post',
-                  fontWeight: FontWeight.bold,
-                  textSize: 20,
-                  textColor: CardColor.fullScreenTitleColor
-                ),
+                    titleText1: 'Post',
+                    fontWeight: FontWeight.bold,
+                    textSize: 20,
+                    textColor: CardColor.fullScreenTitleColor),
               ),
             ),
           ),
@@ -98,7 +102,7 @@ class _AddTweetState extends State<AddTweet> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const AvatarProfile(radius: 20),
+              AvatarProfile(radius: 20 ),
               TweetBody(textEditingController: textEditingController),
               MediaIcon(
                 onImageSelected: (File? file) {

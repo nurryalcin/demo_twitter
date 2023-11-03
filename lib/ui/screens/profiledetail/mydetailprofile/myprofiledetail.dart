@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:twitter/model/tweetwithparent.dart';
-import 'package:twitter/ui/screens/homepage/drawermenu/followfollowingwidget.dart';
-import 'package:twitter/ui/screens/profiledetail/mydetailprofile/mydetail/myprofileimagewidget.dart';
-import 'package:twitter/ui/screens/profiledetail/mydetailprofile/mydetail/myprofilenamedate.dart';
+import 'package:twitter/ui/screens/homepage/drawermenu/widget/followfollowingwidget.dart';
+import 'package:twitter/ui/screens/profiledetail/mydetailprofile/widget/myprofiledetailtabbar.dart';
+import 'package:twitter/ui/screens/profiledetail/mydetailprofile/widget/myprofileimagewidget.dart';
+import 'package:twitter/ui/screens/profiledetail/mydetailprofile/widget/myprofilenamedate.dart';
+import 'package:twitter/utils/class.dart';
 import 'package:twitter/utils/sharedpreferences.dart';
 import 'package:twitter/api_service/tweet_service.dart';
 import 'package:twitter/model/tweetwithprofile.dart';
-import 'package:twitter/ui/screens/profiledetail/mydetailprofile/mydetail/myprofiledetailtabbar.dart';
 
 class MyProfileDetailPage extends StatefulWidget {
   const MyProfileDetailPage({Key? key}) : super(key: key);
@@ -40,7 +41,7 @@ class _MyProfileDetailPageState extends State<MyProfileDetailPage> {
         setState(() {
           fullname = userPreferences.getFullname();
           username = userPreferences.getUsername();
-          createdAt=userPreferences.getDate();
+          createdAt = userPreferences.getDate();
         });
         if (userId != null) {
           loadUserTweets(userId);
@@ -80,39 +81,57 @@ class _MyProfileDetailPageState extends State<MyProfileDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.lightBlue,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search_rounded),
-            onPressed: () {},
-          ),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
-        ],
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  MyProfileImageWidget(
-                    tweet: tweets.isNotEmpty ? tweets[0] : null,
-                  ),
-                  if(fullname!=null && username!=null && createdAt != null)
-                  MyProfileNameDate(fullname: fullname!, username: username!, createdAt: createdAt!,),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 30, top: 15, bottom: 15),
-                    child: FollowFollowingWidget(),
-                  ),
-                  MyProfileDetailTabbar(
-                    tweets: tweets,
-                    tweetList: tweetList,
-                  ),
-                ],
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: 10.0,
+            floating: false,
+            pinned: false,
+            backgroundColor: Colors.lightBlue,
+            iconTheme: IconThemeData(color: CardColor.fullScreenTitleColor),
+            actions: [
+              CircleAvatar(
+                backgroundColor: Colors.black38,
+                maxRadius: 18,
+                child: IconButton(onPressed:() {
+
+                }, icon:Icon(Icons.search)),
+
               ),
-            ),
+              SizedBox(width: 15,),
+              CircleAvatar(
+                maxRadius: 18,
+                backgroundColor: Colors.black38,
+
+                child: IconButton(onPressed: () {
+
+                }, icon: Icon(Icons.more_vert)),
+              )
+            ],
           ),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              MyProfileImageWidget(
+                tweet: tweets.isNotEmpty ? tweets[0] : null,
+              ),
+              if (fullname != null &&
+                  username != null &&
+                  createdAt != null)
+                MyProfileNameDate(
+                  fullname: fullname!,
+                  username: username!,
+                  createdAt: createdAt!,
+                ),
+              const Padding(
+                padding: EdgeInsets.only(left: 30, top: 15, bottom: 15),
+                child: FollowFollowingWidget(),
+              ),
+              MyProfileDetailTabbar(
+                tweets: tweets,
+                tweetList: tweetList,
+              ),
+            ]),
+          )
         ],
       ),
     );

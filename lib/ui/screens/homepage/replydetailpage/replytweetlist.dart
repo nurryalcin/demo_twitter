@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:twitter/model/tweetwithprofile.dart';
 import 'package:twitter/api_service/tweet_service.dart';
 import 'package:twitter/ui/screens/homepage/replydetailpage/replydetailpage.dart';
-import 'package:twitter/ui/screens/profiledetail/tweetcard/tweetcard.dart';
+import 'package:twitter/ui/screens/widgets/tweetcard/tweetcarddd.dart';
 
 class ReplyTweetList extends StatefulWidget {
   ReplyTweetList({super.key,required this.parentTweetId});
@@ -14,6 +14,7 @@ class ReplyTweetList extends StatefulWidget {
 
 class _ReplyTweetListState extends State<ReplyTweetList> {
   List<TweetWithProfile> tweetList = [];
+
 
   @override
   void initState() {
@@ -38,7 +39,7 @@ class _ReplyTweetListState extends State<ReplyTweetList> {
             onTap: () =>
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => ReplyDetailPage(tweet: tweet,))),
-            child: TweetCard(tweet: tweet)
+            child: TweetCardd(tweet: tweet)
           ),
       ],
     );

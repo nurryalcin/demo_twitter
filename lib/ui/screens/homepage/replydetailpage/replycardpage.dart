@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:twitter/model/tweetwithprofile.dart';
-import 'package:twitter/ui/screens/profiledetail/tweetcard/tweetcardcontent.dart';
-import 'package:twitter/ui/screens/profiledetail/tweetcard/tweetcardprofile.dart';
 import 'package:twitter/ui/screens/widgets/avatarprofile.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
+import 'package:twitter/ui/screens/widgets/tweetcard/tweetcardavatarprofile.dart';
+import 'package:twitter/ui/screens/widgets/tweetcard/tweetcardcontent.dart';
 import 'package:twitter/utils/class.dart';
 import 'package:twitter/api_service/tweet_service.dart';
 import 'package:twitter/utils/sharedpreferences.dart';
@@ -93,7 +93,7 @@ class _ReplyCardPageState extends State<ReplyCardPage> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TweetCardProfile(tweet: widget.tweetList,radius: 20),
+                TweetCardAvatarProfile(tweet: widget.tweetList,radius: 20),
                 Expanded(child: TweetCardContent(tweet: widget.tweetList)),
               ],
             ),

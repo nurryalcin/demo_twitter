@@ -4,12 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:twitter/ui/screens/addtweet/addtweet.dart';
 import 'package:twitter/ui/screens/homepage/drawermenu/settingsandprivacy/accountinformation.dart';
 import 'package:twitter/ui/screens/homepage/drawermenu/settingsandprivacy/accountpage.dart';
-import 'package:twitter/ui/screens/homepage/homePage.dart';
 import 'package:twitter/ui/screens/loginpage/page/emailloginpage.dart';
-import 'package:twitter/ui/screens/messagepage/messagestartpage.dart';
-import 'package:twitter/ui/screens/notificationspage/notificationspage.dart';
-import 'package:twitter/ui/screens/peoples/communities.dart';
-import 'package:twitter/ui/screens/searchpage/searcpage.dart';
 import 'package:twitter/ui/screens/widgets/bottomnavigationbarwidget.dart';
 import 'package:twitter/utils/class.dart';
 import 'package:twitter/utils/provider.dart';
@@ -58,7 +53,7 @@ class _MyAppState extends State<MyApp> {
           },
         ),
         appBarTheme: AppBarTheme(
-          elevation: 0,
+          elevation:2,
           backgroundColor: CardColor.fullScreenTitleColor,
           iconTheme: IconThemeData(color: CardColor.titleColor, size: 35),
         ),
