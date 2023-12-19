@@ -1,13 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/api_service/user_service.dart';
 import 'package:twitter/ui/screens/profiledetail/editprofile/editprofiletextfield.dart';
 import 'package:twitter/ui/screens/profiledetail/editprofile/profileselectimage.dart';
-import 'package:twitter/ui/screens/profiledetail/mydetailprofile/myprofiledetail.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/utils/provider.dart';
 import 'package:twitter/utils/sharedpreferences.dart';
-import '../../../../model/tweetwithprofile.dart';
+import 'package:twitter/model/tweetwithprofile.dart';
+
 class EditProfilePage extends StatefulWidget {
   EditProfilePage({super.key, required this.tweet, required this.imagePath});
 
@@ -44,7 +45,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           titleText1: 'Edit Profile',
           fontWeight: FontWeight.bold,
           textSize: 25,
-          textColor: CardColor.titleColor,
+          textColor: Provider.of<UserProfileProvider>(context).titleColor,
         ),
         actions: [
           ElevatedButton(
@@ -56,12 +57,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   minimumSize: MaterialStatePropertyAll(Size(89, 40)),
                   elevation:MaterialStatePropertyAll(0),
                   backgroundColor:
-                  MaterialStatePropertyAll(CardColor.fullScreenTitleColor)),
+                  MaterialStatePropertyAll(Provider.of<UserProfileProvider>(context).fullScreenTitleColor)),
               child: TextWidget(
                   titleText1: 'Save',
                   fontWeight: FontWeight.bold,
                   textSize: 20,
-                  textColor: CardColor.titleColor))
+                  textColor: Provider.of<UserProfileProvider>(context).titleColor))
         ],
 
       ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/api_service/followuser_service.dart';
 import 'package:twitter/ui/screens/homepage/drawermenu/page/followpage/folllowpage.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/utils/provider.dart';
 import 'package:twitter/utils/sharedpreferences.dart';
 import 'package:twitter/model/user.dart';
 
@@ -100,7 +101,7 @@ class _FollowFollowingWidgetState extends State<FollowFollowingWidget> {
               titleText1: '$followingCount  Following',
               fontWeight: FontWeight.normal,
               textSize: 18,
-              textColor: CardColor.userColor),
+              textColor: Provider.of<UserProfileProvider>(context).userColor),
         ),
         SizedBox(
           width: 15,
@@ -119,7 +120,7 @@ class _FollowFollowingWidgetState extends State<FollowFollowingWidget> {
               titleText1: '$followedCount  Followers',
               fontWeight: FontWeight.normal,
               textSize: 18,
-              textColor: CardColor.userColor),
+              textColor: Provider.of<UserProfileProvider>(context).userColor),
         )
       ],
     );

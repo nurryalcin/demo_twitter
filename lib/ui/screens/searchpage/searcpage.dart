@@ -76,7 +76,6 @@ class _SearchPageState extends State<SearchPage> {
               contentPadding: const EdgeInsets.symmetric(vertical: 8),
               prefixIcon: const Icon(Icons.search),
               filled: true,
-              fillColor: Colors.grey[200],
               border: OutlineInputBorder(
                   borderSide: BorderSide.none,
                 borderRadius: BorderRadius.circular(100.0),
@@ -87,7 +86,6 @@ class _SearchPageState extends State<SearchPage> {
         ),
         actions: [
           IconButton(onPressed: () {
-            
           }, icon: Icon(Icons.settings_outlined,size: 25,))
         ],
 

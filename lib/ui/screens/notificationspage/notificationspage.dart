@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/ui/screens/homepage/drawermenu/drawermen%C3%BC.dart';
 import 'package:twitter/ui/screens/widgets/addtweetbutton.dart';
 import 'package:twitter/ui/screens/widgets/avatarprofile.dart';
 import 'package:twitter/ui/screens/widgets/titletext.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/utils/provider.dart';
 
 class NotificationsPage extends StatefulWidget {
   const NotificationsPage({super.key});
@@ -41,7 +42,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
             ),
             title: TitleText(
               textName: 'Notifications',
-              textColor: CardColor.titleColor,
+              textColor: Provider.of<UserProfileProvider>(context).titleColor,
               textWeight: FontWeight.bold,
               textSize: 23,
             ),

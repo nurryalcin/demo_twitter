@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/ui/screens/homepage/drawermenu/drawermen%C3%BC.dart';
 import 'package:twitter/ui/screens/messagepage/messagepageddetail.dart';
 import 'package:twitter/ui/screens/widgets/avatarprofile.dart';
+import 'package:twitter/utils/provider.dart';
 
 class MessageStartPage extends StatefulWidget {
   const MessageStartPage({super.key});
@@ -39,8 +41,7 @@ class _MessageStartPageState extends State<MessageStartPage> {
         ),
         title: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 250, maxHeight: 40),
-          child: TextField(
-           // controller: _searchController,
+          child: TextField(//controller: _searchController,
            // onChanged: _searchUsers,
             onTap: () {
               setState(() {
@@ -58,7 +59,6 @@ class _MessageStartPageState extends State<MessageStartPage> {
               contentPadding: const EdgeInsets.symmetric(vertical: 8),
               prefixIcon: const Icon(Icons.search),
               filled: true,
-              fillColor: Colors.grey[200],
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(100.0),
               ),
@@ -78,6 +78,7 @@ class _MessageStartPageState extends State<MessageStartPage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(
+          color:Provider.of<UserProfileProvider>(context).whiteColor ,
           Icons.mark_email_read_outlined,
           size: 30,
         ),

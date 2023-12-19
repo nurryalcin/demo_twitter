@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/model/tweetwithprofile.dart';
 import 'package:twitter/ui/screens/profiledetail/editprofile/editprofilepage.dart';
 import 'package:twitter/ui/screens/widgets/avatarprofile.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/utils/provider.dart';
 
 class MyProfileImageWidget extends StatelessWidget {
   const MyProfileImageWidget({super.key, this.tweet});
@@ -20,7 +21,7 @@ class MyProfileImageWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 15),
               child: CircleAvatar(
-                backgroundColor: CardColor.fullScreenTitleColor,
+                backgroundColor: Provider.of<UserProfileProvider>(context).fullScreenTitleColor,
                 radius: 45,
                 child: AvatarProfile(radius: 40),
               ),
@@ -30,9 +31,9 @@ class MyProfileImageWidget extends StatelessWidget {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     elevation: 0,
-                    backgroundColor: CardColor.fullScreenTitleColor,
+                    backgroundColor: Provider.of<UserProfileProvider>(context).fullScreenTitleColor,
                     shape: RoundedRectangleBorder(
-                      side: BorderSide(color: CardColor.userColor),
+                      side: BorderSide(color: Provider.of<UserProfileProvider>(context).userColor),
                       borderRadius: BorderRadius.circular(25),
                     ),
                   ),
@@ -50,7 +51,7 @@ class MyProfileImageWidget extends StatelessWidget {
                     titleText1: 'Edit Profile',
                     fontWeight: FontWeight.bold,
                     textSize: 18,
-                    textColor: CardColor.titleColor,
+                    textColor: Provider.of<UserProfileProvider>(context).titleColor
                   ),
                 ))
           ],

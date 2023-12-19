@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/model/followusertweet.dart';
 import 'package:twitter/ui/screens/homepage/replydetailpage/replytweetlist.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
 import 'package:twitter/ui/screens/widgets/tweetcard/tweetcarddd.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/utils/provider.dart';
 
 class TweetDetailPage extends StatelessWidget {
   TweetDetailPage({Key? key, this.followTweet, required this.tweetId});
@@ -19,7 +20,7 @@ class TweetDetailPage extends StatelessWidget {
             titleText1: 'Post',
             fontWeight: FontWeight.bold,
             textSize: 25,
-            textColor: CardColor.titleColor),
+            textColor:Provider.of<UserProfileProvider>(context).titleColor,),
       ),
       body: SingleChildScrollView(
         child: Column(

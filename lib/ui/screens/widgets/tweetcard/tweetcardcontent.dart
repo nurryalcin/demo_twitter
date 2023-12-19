@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/api_service/tweet_service.dart';
 import 'package:twitter/model/followusertweet.dart';
 import 'package:twitter/model/tweetwithprofile.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/utils/provider.dart';
 import 'package:twitter/utils/sharedpreferences.dart';
 
 class TweetCardContent extends StatelessWidget {
@@ -133,20 +134,20 @@ class TweetCardContent extends StatelessWidget {
                       titleText1: '$fullname ',
                       fontWeight: FontWeight.bold,
                       textSize: 15,
-                      textColor: CardColor.titleColor,
+                      textColor: Provider.of<UserProfileProvider>(context).titleColor,
                     ),
                   ),
                   TextWidget(
                     titleText1: '@$username ',
                     fontWeight: FontWeight.bold,
                     textSize: 15,
-                    textColor: CardColor.userColor,
+                    textColor:  Provider.of<UserProfileProvider>(context).userColor,
                   ),
                   TextWidget(
                     titleText1: '·$formattedDate',
                     fontWeight: FontWeight.bold,
                     textSize: 15,
-                    textColor: CardColor.userColor,
+                    textColor:  Provider.of<UserProfileProvider>(context).userColor,
                   ),
                 ],
               ),
@@ -157,7 +158,8 @@ class TweetCardContent extends StatelessWidget {
 
                   },
                 icon:
-                    Icon(Icons.more_vert, color: CardColor.userColor, size: 20),
+                    Icon(Icons.more_vert, color: Provider.of<UserProfileProvider>(context).userColor,
+                        size: 20),
               ),
             ],
           ),

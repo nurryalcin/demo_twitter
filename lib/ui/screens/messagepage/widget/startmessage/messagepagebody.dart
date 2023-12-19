@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/ui/screens/messagepage/messagepageddetail.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/utils/provider.dart';
 
 class BodyMessageWidget extends StatelessWidget {
   const BodyMessageWidget({super.key,});
@@ -15,26 +16,26 @@ class BodyMessageWidget extends StatelessWidget {
         TextWidget(
           titleText1: '',
           fontWeight: FontWeight.bold,
-          textSize: 40, textColor: CardColor.titleColor,),
+          textSize: 40, textColor:Provider.of<UserProfileProvider>(context).titleColor,),
         TextWidget(
           titleText1: '',
           fontWeight: FontWeight.bold,
-          textSize: 40, textColor: CardColor.titleColor,),
+          textSize: 40, textColor: Provider.of<UserProfileProvider>(context).titleColor,),
         const SizedBox(height: 20),
         TextWidget(
           titleText1:
           'Drop a line, share Tweets and more with  ',
           fontWeight: FontWeight.normal,
-          textSize: 20, textColor: CardColor.titleColor,),
+          textSize: 20, textColor: Provider.of<UserProfileProvider>(context).titleColor,),
         TextWidget(
             titleText1: 'private conversations between you and ',
             fontWeight: FontWeight.normal,
             textSize: 20,
-            textColor: CardColor.titleColor),
+            textColor: Provider.of<UserProfileProvider>(context).titleColor),
         TextWidget(titleText1: 'others on Twitter.',
             fontWeight: FontWeight.normal,
             textSize: 20,
-            textColor: CardColor.titleColor),
+            textColor: Provider.of<UserProfileProvider>(context).titleColor),
         const SizedBox(height: 20,),
         ConstrainedBox(
           constraints: const BoxConstraints.tightFor(width: 225, height: 75),

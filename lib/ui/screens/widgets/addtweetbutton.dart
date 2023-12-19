@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/ui/screens/addtweet/addtweet.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/utils/provider.dart';
 class AddTweetButton extends StatefulWidget{
 
   @override
@@ -42,6 +43,7 @@ class _AddTweetButtonState extends State<AddTweetButton> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Provider.of<UserProfileProvider>(context).isDarkMode;
 
 
     return Stack(children: [
@@ -51,7 +53,7 @@ class _AddTweetButtonState extends State<AddTweetButton> {
             closeOverlay(context);
           },
           child: Container(
-            color: Colors.white.withOpacity(0.8),
+            color: isDarkMode ? Colors.black.withOpacity(0.1) : Colors.white.withOpacity(0.1),
             child: Padding(
               padding: const EdgeInsets.only(left: 290,top:534),
               child: Column(
@@ -62,16 +64,16 @@ class _AddTweetButtonState extends State<AddTweetButton> {
                         titleText1: 'Spaces',
                         fontWeight: FontWeight.normal,
                         textSize: 15,
-                        textColor: CardColor.titleColor),
+                        textColor:  Provider.of<UserProfileProvider>(context).titleColor,),
                     const SizedBox(
                       width: 15,
                     ),
                     FloatingActionButton(
-                      backgroundColor: CardColor.fullScreenTitleColor,
+                      backgroundColor:  Provider.of<UserProfileProvider>(context).fullScreenTitleColor,
                       onPressed: () {},
                       child: Icon(
                         Icons.circle_outlined,
-                        color: CardColor.iconColorblue,
+                        color:  Provider.of<UserProfileProvider>(context).iconColorBlue,
                       ),
                     ),
                   ],
@@ -82,16 +84,16 @@ class _AddTweetButtonState extends State<AddTweetButton> {
                       titleText1: 'Photos',
                       fontWeight: FontWeight.normal,
                       textSize: 15,
-                      textColor: CardColor.titleColor),
+                      textColor:  Provider.of<UserProfileProvider>(context).titleColor),
                   const SizedBox(
                     width: 15,
                   ),
                   FloatingActionButton(
-                      backgroundColor: CardColor.fullScreenTitleColor,
+                      backgroundColor:  Provider.of<UserProfileProvider>(context).fullScreenTitleColor,
                       onPressed: () {},
                       child: Icon(
                         Icons.photo_outlined,
-                        color: CardColor.iconColorblue,
+                        color: Provider.of<UserProfileProvider>(context).iconColorBlue,
                         size: 30,
                       )),
                 ]),
@@ -102,16 +104,16 @@ class _AddTweetButtonState extends State<AddTweetButton> {
                         titleText1: 'GIF',
                         fontWeight: FontWeight.normal,
                         textSize: 15,
-                        textColor: CardColor.titleColor),
+                        textColor:  Provider.of<UserProfileProvider>(context).titleColor,),
                     const SizedBox(
                       width: 37,
                     ),
                     FloatingActionButton(
-                      backgroundColor: CardColor.fullScreenTitleColor,
+                      backgroundColor:  Provider.of<UserProfileProvider>(context).fullScreenTitleColor,
                       onPressed: () {},
                       child: Icon(
                         Icons.gif,
-                        color: CardColor.iconColorblue,
+                        color:  Provider.of<UserProfileProvider>(context).iconColorBlue,
                         size: 40,
                       ),
                     ),
@@ -137,6 +139,7 @@ class _AddTweetButtonState extends State<AddTweetButton> {
             FloatingActionButton(
               onPressed: _toggleOverlay,
               child: Icon(
+                color:  Provider.of<UserProfileProvider>(context).whiteColor,
                 currentFabIcon,
                 size: 30,
               ),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:twitter/model/tweetwithprofile.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/ui/screens/profiledetail/editprofile/editprofileavatarphoto.dart';
-import 'package:twitter/utils/class.dart';
-import '../../../../utils/provider.dart';
+import 'package:twitter/utils/provider.dart';
 
 
 class ProfileSelectImage extends StatefulWidget {
@@ -114,7 +113,7 @@ class _ProfileSelectImageState extends State<ProfileSelectImage> {
                       margin: const EdgeInsets.only(left: 15, top: 100),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
-                        color: CardColor.fullScreenTitleColor,
+                        color: Provider.of<UserProfileProvider>(context).fullScreenTitleColor,
                       ),
                       height: 100,
                       width: 100,

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/api_service/followuser_service.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/utils/provider.dart';
 import 'package:twitter/utils/sharedpreferences.dart';
-import '../../../../model/followuser.dart';
+import 'package:twitter/model/followuser.dart';
 
 class FollowButton extends StatefulWidget {
   const FollowButton({super.key, required this.userId, });
@@ -94,10 +95,13 @@ class _FollowButtonState extends State<FollowButton> {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor:
-        _isFollowing ? CardColor.fullScreenTitleColor : CardColor.titleColor,
+        _isFollowing ? Provider.of<UserProfileProvider>(context).followButton: Provider.of<UserProfileProvider>(context).titleColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25),
+          side: BorderSide(color: Provider.of<UserProfileProvider>(context).userColor)
+
         ),
+
       ),
       onPressed: () {
         followUser();
@@ -107,7 +111,7 @@ class _FollowButtonState extends State<FollowButton> {
         fontWeight: FontWeight.bold,
         textSize: 18,
         textColor:
-        _isFollowing ? CardColor.titleColor : CardColor.fullScreenTitleColor,
+        _isFollowing ? Provider.of<UserProfileProvider>(context).fullScreenTitleColor : Provider.of<UserProfileProvider>(context).appbarColor,
       ),
     );
   }

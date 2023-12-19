@@ -16,6 +16,8 @@ class UserPreferences {
   String _email="";
   String get image => _image;
   String get createdAt=> _createdAt;
+  static  String _darkModeKey = 'dark_mode';
+
 
   Future<void> logIn(String username, int userId, String fullName, String image,String createdAt,String email) async {
     final SharedPreferences prefs = await _instance;
@@ -98,9 +100,27 @@ class UserPreferences {
     }
   }
 
-  Future <void> selectedImagePath(String selectedImagePath) async {
-
+  Future<void> setDarkMode(bool isDarkMode) async {
+    final SharedPreferences prefs = await _instance;
+    await prefs.setBool(_darkModeKey, isDarkMode);
   }
+
+  Future<bool> getDarkMode() async {
+    final SharedPreferences prefs = await _instance;
+    bool? isDarkMode = prefs.getBool(_darkModeKey);
+    return isDarkMode ?? false;
+  }
+  Future<int> getSelectedOption() async {
+    final SharedPreferences prefs = await _instance;
+    bool isDarkMode = prefs.getBool(_darkModeKey) ?? false;
+    if (isDarkMode) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+
 
 
 }

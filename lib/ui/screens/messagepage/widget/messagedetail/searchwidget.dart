@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../../api_service/user_service.dart';
-import '../../../../../model/user.dart';
-import '../../../../../utils/class.dart';
-import '../../../../../utils/provider.dart';
+import 'package:twitter/api_service/user_service.dart';
+import 'package:twitter/model/user.dart';
+import 'package:twitter/utils/provider.dart';
 
 
 
@@ -79,7 +78,7 @@ class _SearchWidgetState extends State<SearchWidget> {
               contentPadding: const EdgeInsets.symmetric(vertical: 8),
               prefixIcon: const Icon(Icons.search),
               filled: true,
-              fillColor: CardColor.fullScreenTitleColor,
+              fillColor: Provider.of<UserProfileProvider>(context).fullScreenTitleColor,
             ),
           ),
         ),

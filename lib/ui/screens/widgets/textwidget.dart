@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:twitter/ui/screens/widgets/titletext.dart';
 
-import '../../../utils/class.dart';
 
 class TextWidget extends StatefulWidget {
   final String titleText1;

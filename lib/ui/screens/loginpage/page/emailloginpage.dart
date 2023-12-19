@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/api_service/user_service.dart';
 import 'package:twitter/ui/screens/loginpage/page/passwordloginpage.dart';
 import 'package:twitter/ui/screens/welcomepage/welcome.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/utils/provider.dart';
 
 class EmailLoginPage extends StatefulWidget {
   @override
@@ -47,7 +49,7 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text("Maalesef hesabınızı bulamadık"),
         ),
       );
@@ -56,11 +58,13 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Provider.of<UserProfileProvider>(context).isDarkMode;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.close,
             size: 25,
           ),
@@ -68,13 +72,25 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => WelcomePage(),
+                builder: (context) => const WelcomePage(),
               ),
             );
           },
         ),
-        title: CircleAvatar(
-            radius: 25, backgroundImage: AssetImage('assets/images/logo.jpg')),
+        title: ClipOval(
+          child: SizedBox(
+            height: 30,
+            width: 30,
+            child: ClipOval(
+              child: SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: SvgPicture.asset(isDarkMode
+                      ? 'assets/images/logo_dark.svg'
+                      : 'assets/images/logo.svg')),
+            ),
+          ),
+        )
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 50),
@@ -88,14 +104,14 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
                   titleText1: 'Başlamak için ilk önce e posta adresini gir',
                   fontWeight: FontWeight.bold,
                   textSize: 30,
-                  textColor: CardColor.titleColor,
+                  textColor: Provider.of<UserProfileProvider>(context).titleColor,
                 ),
               ),
               Center(
                 child: SizedBox(
                   width: 350,
                   child: TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'E-posta adresinizi giriniz',
                       border: OutlineInputBorder(),
                     ),
@@ -109,9 +125,9 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
                   ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Divider(
-                color: CardColor.userColor,
+                color: Provider.of<UserProfileProvider>(context).userColor
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
@@ -120,18 +136,18 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
                   children: [
                     ElevatedButton(
                       onPressed:  () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Provider.of<UserProfileProvider>(context).fullScreenTitleColor,
+                        minimumSize: const Size(80, 40),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
                       child: TextWidget(
                         titleText1: 'Şifrenizi mi Unuttunuz?',
                         fontWeight: FontWeight.bold,
                         textSize: 15,
-                        textColor: CardColor.titleColor,
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: CardColor.fullScreenTitleColor,
-                        minimumSize: Size(80, 40),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
+                        textColor: Provider.of<UserProfileProvider>(context).appbarColor
                       ),
                     ),
                     ElevatedButton(
@@ -142,20 +158,20 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
                           emailLogin();
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                               content: Text('Lütfen hataları düzeltin'),
                             ),
                           );
                         }
                       },
-                      child: Text('İleri'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: CardColor.titleColor,
-                        minimumSize: Size(80, 40),
+                        backgroundColor: Provider.of<UserProfileProvider>(context).titleColor,
+                        minimumSize: const Size(80, 40),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
+                      child: const Text('İleri'),
                     ),
                   ],
                 ),

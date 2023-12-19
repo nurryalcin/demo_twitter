@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:twitter/ui/screens/homepage/drawermenu/drawermenuname.dart';
+import 'package:provider/provider.dart';
+import 'package:twitter/ui/screens/homepage/drawermenu/widget/drawermenuname.dart';
 import 'package:twitter/ui/screens/homepage/drawermenu/widget/drawermen%C3%BCmodebutton.dart';
 import 'package:twitter/ui/screens/homepage/drawermenu/widget/drwermen%C3%BClist.dart';
 import 'package:twitter/ui/screens/homepage/drawermenu/widget/followfollowingwidget.dart';
 import 'package:twitter/ui/screens/widgets/avatarprofile.dart';
 import 'package:twitter/ui/screens/widgets/titletext.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/utils/provider.dart';
 
 class DrawerMenu extends StatelessWidget {
   DrawerMenu({super.key});
@@ -43,12 +44,12 @@ class DrawerMenu extends StatelessWidget {
                         ListTile(
                           leading: Icon(
                             item['icon'],
-                            color: CardColor.titleColor,
+                            color: Provider.of<UserProfileProvider>(context).titleColor,
                             size: 25,
                           ),
                           title: TitleText(
                             textName: item['title'],
-                            textColor: CardColor.titleColor,
+                            textColor: Provider.of<UserProfileProvider>(context).titleColor,
                             textWeight: FontWeight.bold,
                             textSize: 17,
                           ),
@@ -62,7 +63,7 @@ class DrawerMenu extends StatelessWidget {
                         ExpansionTile(
                           title: TitleText(
                             textName: item['title'],
-                            textColor: CardColor.titleColor,
+                            textColor: Provider.of<UserProfileProvider>(context).titleColor,
                             textWeight: FontWeight.bold,
                             textSize: 17,
                           ),
@@ -71,13 +72,13 @@ class DrawerMenu extends StatelessWidget {
                                 (subItem) => ListTile(
                                   leading: Icon(
                                     subItem['icon'],
-                                    color: CardColor.titleColor,
+                                    color: Provider.of<UserProfileProvider>(context).titleColor,
                                     size: 20,
                                   ),
                                   title: Text(
                                     subItem['title'],
                                     style: TextStyle(
-                                      color: CardColor.titleColor,
+                                      color:Provider.of<UserProfileProvider>(context).titleColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14,
                                     ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/model/tweetwithprofile.dart';
 import 'package:twitter/ui/screens/widgets/tweetcard/tweetcardavatarprofile.dart';
-import 'package:twitter/utils/class.dart';
 import 'package:twitter/ui/screens/profiledetail/profiledetail/followbutton.dart';
+import 'package:twitter/utils/provider.dart';
 
 
 class ProfileDetailImage extends StatelessWidget {
@@ -22,7 +23,7 @@ class ProfileDetailImage extends StatelessWidget {
                 margin:EdgeInsets.only(bottom: 60),
                 width: 500,
                 height: 100,
-                color: Colors.lightBlue
+                color: Provider.of<UserProfileProvider>(context).iconColorlightBlue
               ),
 
               Padding(
@@ -33,7 +34,7 @@ class ProfileDetailImage extends StatelessWidget {
                    Padding(
                      padding: const EdgeInsets.only(left: 15),
                      child: CircleAvatar(
-                       backgroundColor: CardColor.fullScreenTitleColor,
+                       backgroundColor: Provider.of<UserProfileProvider>(context).fullScreenTitleColor,
                        radius: 45,
                        child: TweetCardAvatarProfile(tweet: tweet,radius: 40),
                      ),

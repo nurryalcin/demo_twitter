@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/ui/screens/homepage/drawermenu/settingsandprivacy/settinglist.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/utils/provider.dart';
 import 'package:twitter/utils/sharedpreferences.dart';
 
 class SettingPage extends StatefulWidget {
@@ -40,12 +41,12 @@ class _SettingPageState extends State<SettingPage> {
                 titleText1: 'Settings',
                 fontWeight: FontWeight.bold,
                 textSize: 20,
-                textColor: CardColor.titleColor),
+                textColor:Provider.of<UserProfileProvider>(context).titleColor),
             TextWidget(
                 titleText1: '@$username',
                 fontWeight: FontWeight.normal,
                 textSize: 18,
-                textColor: CardColor.userColor)
+                textColor: Provider.of<UserProfileProvider>(context).userColor)
           ],
         ),
       ),
@@ -60,7 +61,7 @@ class _SettingPageState extends State<SettingPage> {
                     shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25))),
                     backgroundColor:
-                        MaterialStatePropertyAll(Colors.grey[200])),
+                        MaterialStatePropertyAll(Provider.of<UserProfileProvider>(context).appbarColor),),
                 child: Container(
                   width: 350,
                   child: Row(
@@ -68,13 +69,13 @@ class _SettingPageState extends State<SettingPage> {
                     children: [
                       Icon(
                         Icons.search_rounded,
-                        color: CardColor.userColor,
+                        color: Provider.of<UserProfileProvider>(context).userColor,
                       ),
                       TextWidget(
                           titleText1: 'Search settings',
                           fontWeight: FontWeight.normal,
                           textSize: 15,
-                          textColor: CardColor.userColor)
+                          textColor: Provider.of<UserProfileProvider>(context).userColor)
                     ],
                   ),
                 ),

@@ -1,15 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/api_service/tweet_service.dart';
 import 'package:twitter/ui/screens/addtweet/widget/mediaicon.dart';
 import 'package:twitter/ui/screens/addtweet/widget/tweetbody.dart';
 import 'package:twitter/ui/screens/homepage/homePage.dart';
 import 'package:twitter/ui/screens/widgets/avatarprofile.dart';
-import 'package:twitter/ui/screens/widgets/bottomnavigationbarwidget.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
-import 'package:twitter/ui/screens/widgets/tweetcard/tweetcardavatarprofile.dart';
+import 'package:twitter/utils/provider.dart';
 import 'package:twitter/utils/sharedpreferences.dart';
-import '../../../utils/class.dart';
 
 class AddTweet extends StatefulWidget {
   const AddTweet({
@@ -83,14 +82,14 @@ class _AddTweetState extends State<AddTweet> {
                     )),
                     backgroundColor: MaterialStatePropertyAll(
                       isButtonEnabled
-                          ? CardColor.iconColorblue
-                          : Colors.lightBlueAccent,
+                          ? Provider.of<UserProfileProvider>(context).iconColorBlue
+                          : Provider.of<UserProfileProvider>(context).iconColorlightBlue,
                     )),
                 child: TextWidget(
                     titleText1: 'Post',
                     fontWeight: FontWeight.bold,
                     textSize: 20,
-                    textColor: CardColor.fullScreenTitleColor),
+                    textColor: Provider.of<UserProfileProvider>(context).fullScreenTitleColor),
               ),
             ),
           ),

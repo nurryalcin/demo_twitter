@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:provider/provider.dart';
+import 'package:twitter/utils/provider.dart';
+
 class TweetBody extends StatelessWidget {
   final TextEditingController textEditingController;
 
@@ -14,7 +16,7 @@ class TweetBody extends StatelessWidget {
           width: double.infinity,
           child: TextField(
             controller: textEditingController,
-            cursorColor: CardColor.userColor,
+            cursorColor: Provider.of<UserProfileProvider>(context).userColor,
             cursorHeight: 30,
             maxLines: null,
             textAlignVertical: TextAlignVertical.center,

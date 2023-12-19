@@ -1,6 +1,6 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:twitter/ui/screens/homepage/drawermenu/drawermen%C3%BC.dart';
 import 'package:twitter/ui/screens/widgets/avatarprofile.dart';
@@ -8,7 +8,7 @@ import 'package:twitter/utils/provider.dart';
 
 class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
   @override
-  double get maxExtent => 120.0;
+  double get maxExtent => 110.0;
 
   @override
   double get minExtent => 15.0;
@@ -21,6 +21,8 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
+    bool isDarkMode = Provider.of<UserProfileProvider>(context).isDarkMode;
+
     return AppBar(
       leading: GestureDetector(
         onTap: () async {
@@ -29,9 +31,11 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
             builder: (BuildContext context) {
               return Align(
                 alignment: AlignmentDirectional.centerStart,
-                child: GestureDetector(onTap:() {
-                  Navigator.pop(context);
-                }, child: DrawerMenu()),
+                child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: DrawerMenu()),
               );
             },
           );
@@ -46,9 +50,13 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
         ),
       ),
       centerTitle: true,
-      title: const CircleAvatar(
-        radius: 15,
-        backgroundImage: AssetImage('assets/images/logo.jpg'),
+      title: ClipOval(
+        child: SizedBox(
+            height: 40,
+            width: 40,
+            child: SvgPicture.asset(isDarkMode
+                ? 'assets/images/logo_dark.svg'
+                : 'assets/images/logo.svg')),
       ),
     );
   }

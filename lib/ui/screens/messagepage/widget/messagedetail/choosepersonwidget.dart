@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/ui/screens/messagepage/sendmessage.dart';
-import 'package:twitter/ui/screens/widgets/bottomnavigationbarwidget.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
-import 'package:twitter/utils/class.dart';
-import '../../../../../model/user.dart';
+import 'package:twitter/utils/provider.dart';
+import 'package:twitter/model/user.dart';
 
 class ChoosePerson extends StatelessWidget {
   const ChoosePerson({super.key, required this.isUserSelected, this.onPressed, this.user, });
@@ -33,7 +33,7 @@ class ChoosePerson extends StatelessWidget {
                 child: TextWidget(
                   titleText1: 'New message',
                   fontWeight: FontWeight.bold,
-                  textSize: 25, textColor: CardColor.titleColor,
+                  textSize: 25, textColor:Provider.of<UserProfileProvider>(context).titleColor
                 ),
               ),
               const SizedBox(width: 60,),
@@ -42,7 +42,7 @@ class ChoosePerson extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(60),
                   ),
-                  backgroundColor: isUserSelected ? CardColor.userColor : CardColor.titleColor,
+                  backgroundColor: isUserSelected ?Provider.of<UserProfileProvider>(context).userColor : Provider.of<UserProfileProvider>(context).titleColor,
                 ),
                 onPressed: isUserSelected
                     ? () async {
@@ -60,7 +60,7 @@ class ChoosePerson extends StatelessWidget {
                     titleText1: 'Next',
                     fontWeight: FontWeight.bold,
                     textSize: 25,
-                    textColor: CardColor.fullScreenTitleColor,
+                    textColor: Provider.of<UserProfileProvider>(context).fullScreenTitleColor
                   ),
                 ),
               )

@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:provider/provider.dart';
+import 'package:twitter/utils/provider.dart';
 
 class MediaIcon extends StatefulWidget {
   MediaIcon({super.key, required this.onImageSelected});
+
   final void Function(File?) onImageSelected;
 
   @override
@@ -38,35 +40,36 @@ class _MediaIconState extends State<MediaIcon> {
       children: [
         SizedBox(
           width: 288,
-          height:  imageFile != null ? 288 : 0,
+          height: imageFile != null ? 288 : 0,
           child: Stack(
             alignment: Alignment.topRight,
             children: [
               imageFile != null
                   ? Image.file(
-                File(imageFile!.path!),
-                width: 288,
-                height: null,
-                fit: BoxFit.cover,
-              )
+                      File(imageFile!.path!),
+                      width: 288,
+                      height: null,
+                      fit: BoxFit.cover,
+                    )
                   : Container(),
               imageFile != null
                   ? Container(
-                height: 35,
-                width: 35,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: CardColor.titleColor.withOpacity(0.7),
-                ),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.close,
-                    color: CardColor.fullScreenTitleColor,
-                    size: 20,
-                  ),
-                  onPressed: _removeImage,
-                ),
-              )
+                      height: 35,
+                      width: 35,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Provider.of<UserProfileProvider>(context).appbarColor.
+                        withOpacity(0.7),
+                      ),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.close,
+                          color: Provider.of<UserProfileProvider>(context).titleColor,
+                          size: 20,
+                        ),
+                        onPressed: _removeImage,
+                      ),
+                    )
                   : Container(),
             ],
           ),
@@ -78,7 +81,7 @@ class _MediaIconState extends State<MediaIcon> {
             icon: Icon(
               Icons.perm_media_outlined,
               size: 30,
-              color: CardColor.iconColorblue,
+              color: Provider.of<UserProfileProvider>(context).iconColorBlue,
             ),
             onPressed: () {
               _selectImage(context);

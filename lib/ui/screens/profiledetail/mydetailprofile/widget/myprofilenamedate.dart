@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/utils/provider.dart';
 
 class MyProfileNameDate extends StatelessWidget {
   MyProfileNameDate(
@@ -55,13 +56,13 @@ class MyProfileNameDate extends StatelessWidget {
               titleText1: fullname,
               fontWeight: FontWeight.bold,
               textSize: 25,
-              textColor: CardColor.titleColor,
+              textColor: Provider.of<UserProfileProvider>(context).titleColor
             ),
             TextWidget(
                 titleText1: '@$username ',
                 fontWeight: FontWeight.bold,
                 textSize: 17,
-                textColor: CardColor.userColor),
+                textColor: Provider.of<UserProfileProvider>(context).userColor),
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Row(
@@ -69,13 +70,13 @@ class MyProfileNameDate extends StatelessWidget {
                   Icon(
                     Icons.calendar_month_outlined,
                     size: 20,
-                    color: CardColor.userColor,
+                    color: Provider.of<UserProfileProvider>(context).userColor,
                   ),
                   TextWidget(
                       titleText1: "${getFormattedDate()}'te katıldı",
                       fontWeight: FontWeight.normal,
                       textSize: 18,
-                      textColor: CardColor.userColor)
+                      textColor: Provider.of<UserProfileProvider>(context).userColor)
                 ],
               ),
             )

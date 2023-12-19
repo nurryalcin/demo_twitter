@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/utils/provider.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({
@@ -43,12 +44,12 @@ class AccountPage extends StatelessWidget {
                 titleText1: 'Your account',
                 fontWeight: FontWeight.bold,
                 textSize: 20,
-                textColor: CardColor.titleColor),
+                textColor: Provider.of<UserProfileProvider>(context).titleColor),
             TextWidget(
                 titleText1: '@$username',
                 fontWeight: FontWeight.normal,
                 textSize: 18,
-                textColor: CardColor.userColor)
+                textColor: Provider.of<UserProfileProvider>(context).userColor)
           ],
         ),
       ),
@@ -62,7 +63,7 @@ class AccountPage extends StatelessWidget {
                     'See information about your account, download an archive of your data,or learn about your account deactivation options.',
                 fontWeight: FontWeight.normal,
                 textSize: 15,
-                textColor: CardColor.userColor),
+                textColor: Provider.of<UserProfileProvider>(context).userColor),
           ),
           Expanded(
             child: ListView.builder(

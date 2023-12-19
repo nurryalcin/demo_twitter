@@ -1,13 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/ui/screens/addtweet/widget/mediaicon.dart';
 import 'package:twitter/ui/screens/widgets/avatarprofile.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
 import 'package:twitter/ui/screens/widgets/tweetcard/tweetcardavatarprofile.dart';
 import 'package:twitter/ui/screens/widgets/tweetcard/tweetcardcontent.dart';
-import 'package:twitter/utils/class.dart';
 import 'package:twitter/api_service/tweet_service.dart';
 import 'package:twitter/model/followusertweet.dart';
+import 'package:twitter/utils/provider.dart';
 import 'package:twitter/utils/sharedpreferences.dart';
 
 class FollowReplyPage extends StatefulWidget {
@@ -76,14 +77,14 @@ class _FollowReplyPageState extends State<FollowReplyPage> {
                   borderRadius: BorderRadius.circular(25),
                 )),
                 backgroundColor: MaterialStatePropertyAll(isButtonEnabled
-                    ? CardColor.iconColorblue
-                    : Colors.lightBlueAccent,)
+                    ? Provider.of<UserProfileProvider>(context).iconColorBlue
+                    : Provider.of<UserProfileProvider>(context).iconColorlightBlue,)
               ),
 
               child: Text('Reply',
                   style: TextStyle(
                     fontSize: 20,
-                    color:  CardColor.fullScreenTitleColor
+                    color:  Provider.of<UserProfileProvider>(context).fullScreenTitleColor
                   )),
             ),
           )
@@ -111,13 +112,13 @@ class _FollowReplyPageState extends State<FollowReplyPage> {
                       titleText1: 'Replying to ',
                       fontWeight: FontWeight.normal,
                       textSize: 20,
-                      textColor: CardColor.userColor,
+                      textColor: Provider.of<UserProfileProvider>(context).userColor,
                     ),
                     TextWidget(
                       titleText1: '@${widget.followTweet.username}',
                       fontWeight: FontWeight.normal,
                       textSize: 20,
-                      textColor: CardColor.iconColorblue,
+                      textColor: Provider.of<UserProfileProvider>(context).iconColorBlue,
                     ),
                   ],
                 ),

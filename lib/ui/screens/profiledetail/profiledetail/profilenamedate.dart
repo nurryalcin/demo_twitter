@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/model/tweetwithprofile.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/utils/provider.dart';
 
 class ProfileNameDate extends StatelessWidget {
   const ProfileNameDate({super.key, this.tweet});
@@ -51,7 +52,7 @@ class ProfileNameDate extends StatelessWidget {
                 titleText1: tweet!.fullname,
                 fontWeight: FontWeight.bold,
                 textSize: 20,
-                textColor: CardColor.titleColor,
+                textColor:Provider.of<UserProfileProvider>(context).titleColor
               ),
             ),
 
@@ -61,7 +62,7 @@ class ProfileNameDate extends StatelessWidget {
                   titleText1: '@${tweet!.username} ',
                   fontWeight: FontWeight.bold,
                   textSize: 20,
-                  textColor: CardColor.userColor),
+                  textColor: Provider.of<UserProfileProvider>(context).userColor),
             ),
             Padding(
               padding: EdgeInsets.only(left: 5,top: 15),
@@ -77,7 +78,7 @@ class ProfileNameDate extends StatelessWidget {
                         titleText1:  "${getFormattedDate()}'te katıldı",
                         fontWeight: FontWeight.bold,
                         textSize: 15,
-                        textColor: CardColor.userColor),
+                        textColor:Provider.of<UserProfileProvider>(context).userColor),
                   ),
                 ],
               ),

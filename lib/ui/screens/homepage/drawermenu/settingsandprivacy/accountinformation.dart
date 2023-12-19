@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/ui/screens/welcomepage/welcome.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/utils/provider.dart';
 import 'package:twitter/utils/sharedpreferences.dart';
 
 class AccountInformation extends StatefulWidget {
@@ -71,12 +72,12 @@ class _AccountInformationState extends State<AccountInformation> {
                 titleText1: 'Account information',
                 fontWeight: FontWeight.bold,
                 textSize: 20,
-                textColor: CardColor.titleColor),
+                textColor:Provider.of<UserProfileProvider>(context).titleColor),
             TextWidget(
                 titleText1: '@$username',
                 fontWeight: FontWeight.normal,
                 textSize: 20,
-                textColor: CardColor.userColor),
+                textColor:Provider.of<UserProfileProvider>(context).userColor),
           ],
         ),
       ),
@@ -100,7 +101,7 @@ class _AccountInformationState extends State<AccountInformation> {
             child: ListTile(
               title: Text(list[index]['title'],
                 style: TextStyle(
-                  color: list[index]['title'] == 'Log out' ? Colors.red : CardColor.titleColor,
+                  color: list[index]['title'] == 'Log out' ? Colors.red :Provider.of<UserProfileProvider>(context).titleColor
                 ),),
 
               subtitle: Text(

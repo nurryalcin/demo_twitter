@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/model/tweetwithparent.dart';
 import 'package:twitter/ui/screens/homepage/drawermenu/widget/followfollowingwidget.dart';
 import 'package:twitter/ui/screens/profiledetail/mydetailprofile/widget/myprofiledetailtabbar.dart';
 import 'package:twitter/ui/screens/profiledetail/mydetailprofile/widget/myprofileimagewidget.dart';
 import 'package:twitter/ui/screens/profiledetail/mydetailprofile/widget/myprofilenamedate.dart';
-import 'package:twitter/utils/class.dart';
+import 'package:twitter/utils/provider.dart';
 import 'package:twitter/utils/sharedpreferences.dart';
 import 'package:twitter/api_service/tweet_service.dart';
 import 'package:twitter/model/tweetwithprofile.dart';
@@ -87,8 +88,8 @@ class _MyProfileDetailPageState extends State<MyProfileDetailPage> {
             expandedHeight: 10.0,
             floating: false,
             pinned: false,
-            backgroundColor: Colors.lightBlue,
-            iconTheme: IconThemeData(color: CardColor.fullScreenTitleColor),
+            backgroundColor: Provider.of<UserProfileProvider>(context).iconColorlightBlue,
+            iconTheme: IconThemeData(color: Provider.of<UserProfileProvider>(context).fullScreenTitleColor),
             actions: [
               CircleAvatar(
                 backgroundColor: Colors.black38,
@@ -101,7 +102,7 @@ class _MyProfileDetailPageState extends State<MyProfileDetailPage> {
               SizedBox(width: 15,),
               CircleAvatar(
                 maxRadius: 18,
-                backgroundColor: Colors.black38,
+                backgroundColor: Provider.of<UserProfileProvider>(context).userColor,
 
                 child: IconButton(onPressed: () {
 

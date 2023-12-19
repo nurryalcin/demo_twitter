@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:twitter/ui/screens/homepage/homePage.dart';
 import 'package:twitter/ui/screens/welcomepage/welcome.dart';
 import 'package:twitter/ui/screens/widgets/bottomnavigationbarwidget.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
 import 'package:twitter/ui/screens/widgets/titletext.dart';
-import 'package:twitter/utils/class.dart';
-import '../../../../api_service/user_service.dart';
-import '../../../../utils/provider.dart';
-import '../../../../utils/sharedpreferences.dart';
+import 'package:twitter/api_service/user_service.dart';
+import 'package:twitter/utils/provider.dart';
+import 'package:twitter/utils/sharedpreferences.dart';
 
 class PasswordLoginPage extends StatefulWidget {
   final String email;
@@ -50,7 +49,7 @@ class _PasswordLoginPageState extends State<PasswordLoginPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const HomePage()
+          builder: (context) => const BottomNavigationBarWidget(index: 0)
         ),
       );
 
@@ -66,6 +65,8 @@ class _PasswordLoginPageState extends State<PasswordLoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Provider.of<UserProfileProvider>(context).isDarkMode;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -80,13 +81,14 @@ class _PasswordLoginPageState extends State<PasswordLoginPage> {
           },
         ),
         centerTitle: true,
-        title: const SizedBox(
-          height: 40,
-          width: 40,
-          child: CircleAvatar(
-            backgroundImage: AssetImage('assets/images/logo.jpg'),
-            radius: 25,
-          ),
+        title:  ClipOval(
+          child: SizedBox(
+              height: 40,
+              width: 40,
+              child: SvgPicture.asset(isDarkMode
+                  ? 'assets/images/logo_dark.svg'
+                  : 'assets/images/logo.svg')),
+
         ),
       ),
       body: Column(
@@ -96,7 +98,7 @@ class _PasswordLoginPageState extends State<PasswordLoginPage> {
             padding: const EdgeInsets.only(left: 40, top: 40, bottom: 25),
             child: TitleText(
                 textName: 'Şifreni Gir',
-                textColor: CardColor.titleColor,
+                textColor: Provider.of<UserProfileProvider>(context).titleColor,
                 textWeight: FontWeight.bold,
                 textSize: 35),
           ),
@@ -156,7 +158,7 @@ class _PasswordLoginPageState extends State<PasswordLoginPage> {
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: CardColor.fullScreenTitleColor,
+                    backgroundColor: Provider.of<UserProfileProvider>(context).fullScreenTitleColor,
                     minimumSize: const Size(80, 40),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -166,15 +168,15 @@ class _PasswordLoginPageState extends State<PasswordLoginPage> {
                     titleText1: 'Şifrenizi mi Unuttunuz?',
                     fontWeight: FontWeight.bold,
                     textSize: 15,
-                    textColor: CardColor.titleColor,
+                    textColor: Provider.of<UserProfileProvider>(context).appbarColor,
                   ),
                 ),
                 ElevatedButton(
                   onPressed: _isEmptyPassword ? null : () => login(),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: _isEmptyPassword
-                        ? Colors.grey
-                        : CardColor.titleColor,
+                        ? Provider.of<UserProfileProvider>(context).userColor
+                        : Provider.of<UserProfileProvider>(context).titleColor,
                     minimumSize: const Size(60, 40),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),

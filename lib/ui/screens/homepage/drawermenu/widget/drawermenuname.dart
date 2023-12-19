@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter/ui/screens/widgets/textwidget.dart';
-import 'package:twitter/utils/class.dart';
-import '../../../../utils/sharedpreferences.dart';
+import 'package:twitter/utils/provider.dart';
+import 'package:twitter/utils/sharedpreferences.dart';
 
 class DrawerMenuName extends StatefulWidget {
   @override
@@ -41,12 +42,12 @@ class _DrawerMenuNameState extends State<DrawerMenuName> {
               titleText1: fullname ?? "",
               fontWeight: FontWeight.bold,
               textSize: 25,
-              textColor: CardColor.titleColor),
+              textColor: Provider.of<UserProfileProvider>(context).titleColor),
           TextWidget(
               titleText1: '@$username ',
               fontWeight: FontWeight.normal,
               textSize: 20,
-              textColor: CardColor.userColor),
+              textColor: Provider.of<UserProfileProvider>(context).userColor),
         ],
       ),
     );
